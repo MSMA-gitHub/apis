@@ -1,14 +1,23 @@
 <?php 
     require 'db.php'; 
-    $item =$_GET['search-field'];
-    $sql="";
+    $sql="SELECT name,image,id,price  FROM product where name like %?% and   product.country in( select country from users where users.id = ?) ";
+  
 $stmt=$conn->prepare($sql);
-$stmt->execute();
+$stmt->execute(array($_GET['search'],$_GET['user_id']));
 $result=$stmt->fetchAll();
 $size=$stmt->rowCount();
-$message=json_encode($result);
- echo $message;
- //  result[i][1] =
- //  result[i][0] =
+$message=array();
 
-?>
+for($i=0;$i<$size;$i++)
+{
+$message[$i]=array("name"=>$result[$i][0],"image"=>$result[$i][1],"id"=>$result[$i][2],"price"=>$result[$i][3]);
+
+}
+$message=json_encode($message);
+ echo $message;
+
+ //  result[i][0] = name of product
+ //  result[i][1] = photo of the product 
+//  result[i][2] = id of the product 
+//  result[i][3] = price of the product 
+?>  
