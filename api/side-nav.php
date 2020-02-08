@@ -9,7 +9,7 @@ echo'<nav class="sidebar sidebar-offcanvas" id="sidebar">
                                 <span class="text-secondary text-small">Project Manager</span>
                             </div>
                             <div class="nav-profile-image">
-                                <img src="../assets/images/faces/face1.jpg" alt="profile">
+                                <img src="../../assets/images/faces/face1.jpg" alt="profile">
                                 <span class="login-status online"></span>
                                 <!--change to offline or busy as needed-->
                             </div>
@@ -34,7 +34,7 @@ echo'<nav class="sidebar sidebar-offcanvas" id="sidebar">
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../users/users.html">
+                        <a class="nav-link" href="../users/users.php">
                             <span class="menu-title">إدارة المستخدمين</span>
                             <i class="mdi mdi-account-settings menu-icon"></i>
                         </a>

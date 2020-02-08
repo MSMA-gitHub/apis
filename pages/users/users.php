@@ -53,6 +53,9 @@
                                            
                                                
                                             </tbody>
+                                            
+                                            
+                                           
                                         </table>
                                     </div>
                                 </div>
@@ -97,7 +100,7 @@
     <script>
         function user() {
         $.ajax({
-          url: "../../api/user.php",
+          url: "../../api/user/user.php",
           method: "POST",
           data: {
           },
@@ -109,6 +112,14 @@
         });
       }
     </script>
+    <script>
+        function delete_user(x)
+        {
+            var v ='delete'+x;
+            if(confirm(' سيتم مسح المستخدم ! '))
+            document.getElementById(v).submit();
+        }
+        </script>
   <script>
         $(document).ready(function() {
             user();

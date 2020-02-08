@@ -1,8 +1,8 @@
 <?php 
 echo'
-<form id="user" action="../pages/users/profile.php" method="POST"> <input type="hidden" name="id" value="'.$_POST['id'].'">
+<form id="user" action="../../pages/users/profile.php" method="POST"> <input type="hidden" name="id" value="'.$_POST['id'].'">
 </form>';
-        require 'db.php';
+        require '../db.php';
        // value sent to here by post method
         $name =$_POST['name']; 
         $email =$_POST['email'];  

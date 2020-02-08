@@ -1,5 +1,5 @@
  <?php
-require 'db.php';
+require '../db.php';
 
 $sql="select *  from users;";
 $stmt=$conn->prepare($sql);
@@ -24,8 +24,14 @@ if($size>0)
                                                     <td> <?php echo@$country[0][0]; ?> </td>
                                                     <td> <?php echo@$city[0][0]; ?> </td>
                                                     <td>
-                                                       <form id="user" action="profile.php" method="POST"> <input type="hidden" name="id" value="<?php echo$result[$i]['id']; ?>">
-                                                       <a onclick="document.getElementById('user').submit();"><label class="badge badge-gradient-info">الصفحة الشخصية</label></a></form>
+                                                    <div class="row">
+                                                       <form id="user<?php echo$result[$i]['id']; ?>" action="profile.php" method="POST"> <input type="hidden" name="id" value="<?php echo$result[$i]['id']; ?>">
+                                                       <a onclick="document.getElementById('user<?php echo$result[$i]['id']; ?>').submit();"><label class="badge badge-gradient-info">الصفحة الشخصية</label></a></form>
+                                                       <form id="delete<?php echo$result[$i]['id']; ?>" action="../../api/user/delete.php" method="POST"> <input type="hidden" name="id" value="<?php echo$result[$i]['id']; ?>">
+                                                       <button onclick="delete_user(<?php echo$result[$i]['id']; ?>);" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                                <i class="mdi mdi-close"></i>
+                                                              </button></form>
+                                                        </div>
                                                     </td>
                                                 </tr>';
                                                 <?php

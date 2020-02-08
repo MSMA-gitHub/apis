@@ -77,8 +77,8 @@
                     <div class="row">
                         <div class="rtl col-12 grid-margin">
                             <div class="card">
-                                <form action="">
-                                    <div class="card-body">
+                            <form action="../../api/user/changeuserdata.php" enctype="multipart/form-data" method="post">
+                                   <div class="card-body">
                                         <div class="form-group row">
                                             <div class="col-2">
                                                 <div onclick="pro1()" class="nav-profile-image">
@@ -179,9 +179,9 @@
                                             </div>
 
                                         </div>
-                                        <a href="Control.html"> <button type="button" class="btn btn-danger btn-fw">مسح</button></a>
+                                        <a onclick="delete_user(<?php echo$result[$i]['id']; ?>);"><button type="button" class="btn btn-danger btn-fw">مسح</button></a>
                                         <a href="Control.html"> <button type="submit" style="float:left" class="btn btn-outline-primary btn-round">تعديل</button></a>
-                                </form>
+                                </form></form>
                                 </div>
                             </div>
                         </div>
@@ -378,6 +378,23 @@
             }
         </script>
         <script>
+            
+            function delete_user(x)
+            {
+               
+                $.ajax({
+              url: "../../api/user/delete.php",
+              method: "POST",
+              data: {
+                  id : x
+              },
+              success: function (data) {
+                setTimeout(function(){
+                  window.location.href="users.php";
+              },800)
+              }
+            });
+            }
             function a(x)
             {
                 
