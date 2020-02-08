@@ -1,47 +1,47 @@
 
  <?php
- require '../../api/db.php';
- if(!isset($_POST['id']))
-  header("location: users.php");
-  else
-  $u =$_POST['id'];
- $sql="select *  from users where id = $u;";
- $stmt=$conn->prepare($sql);
- $stmt->execute();
- $size=$stmt->rowCount();
- $result=$stmt->fetchAll();
-  
-     $stmt=$conn->prepare("select *  from country where  id ='".$result[0]["country"]."';");
-     $stmt->execute();
-     $country=$stmt->fetchAll();
-     $stmt=$conn->prepare("select *  from country");
-     $stmt->execute();
-     $countries=$stmt->fetchAll();
-     $countries_size=$stmt->rowcount();
-     $stmt=$conn->prepare("select *  from city where  id ='".$result[0]["city"]."';");
-     $stmt->execute();
-     $city=$stmt->fetchAll();
-     $stmt=$conn->prepare("select *  from city where  countrycode ='".$result[0]["country"]."';");
-     $stmt->execute();
-     $cities=$stmt->fetchAll();
-     $cities_size=$stmt->rowcount();
+require '../../api/db.php';
+if(!isset($_POST['id']))
+ header("location: users.php");
+ else
+ $u =$_POST['id'];
+$sql="select *  from users where id = $u;";
+$stmt=$conn->prepare($sql);
+$stmt->execute();
+$size=$stmt->rowCount();
+$result=$stmt->fetchAll();
  
-     $stmt=$conn->prepare("select *  from store where  id in (select store_Id from favorite_s where id ='".$u."');");
-     $stmt->execute();
-     $stores=$stmt->fetchAll();
-     $stores_size=$stmt->rowcount();
- 
-     $stmt=$conn->prepare("select *  from magazine where  id in (select magazine from favorite_m where id ='".$u."');");
-     $stmt->execute();
-     $magazines=$stmt->fetchAll();
-     $magazines_size=$stmt->rowcount();
- 
-     $stmt=$conn->prepare("select *  from code where  code in (select code from favorite_c where id ='".$u."');");
-     $stmt->execute();
-     $code=$stmt->fetchAll();
-     $code_size=$stmt->rowcount();
-     ?>
-<html lang="en">
+    $stmt=$conn->prepare("select *  from country where  id ='".$result[0]["country"]."';");
+    $stmt->execute();
+    $country=$stmt->fetchAll();
+    $stmt=$conn->prepare("select *  from country");
+    $stmt->execute();
+    $countries=$stmt->fetchAll();
+    $countries_size=$stmt->rowcount();
+    $stmt=$conn->prepare("select *  from city where  id ='".$result[0]["city"]."';");
+    $stmt->execute();
+    $city=$stmt->fetchAll();
+    $stmt=$conn->prepare("select *  from city where  countrycode ='".$result[0]["country"]."';");
+    $stmt->execute();
+    $cities=$stmt->fetchAll();
+    $cities_size=$stmt->rowcount();
+
+    $stmt=$conn->prepare("select *  from store where  id in (select store_Id from favorite_s where id ='".$u."');");
+    $stmt->execute();
+    $stores=$stmt->fetchAll();
+    $stores_size=$stmt->rowcount();
+
+    $stmt=$conn->prepare("select *  from magazine where  id in (select magazine from favorite_m where id ='".$u."');");
+    $stmt->execute();
+    $magazines=$stmt->fetchAll();
+    $magazines_size=$stmt->rowcount();
+
+    $stmt=$conn->prepare("select *  from code where  code in (select code from favorite_c where id ='".$u."');");
+    $stmt->execute();
+    $code=$stmt->fetchAll();
+    $code_size=$stmt->rowcount();
+    ?>
+    <html lang="en">
 
 <head>
     <!-- Required meta tags -->
@@ -62,8 +62,9 @@
 <body class="">
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
+       
         <?php include'../../api/nav.php';?>
-        <!-- partial -->
+                <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <div class="main-panel">
                 <div class="content-wrapper">
@@ -77,7 +78,7 @@
                     <div class="row">
                         <div class="rtl col-12 grid-margin">
                             <div class="card">
-                                <form action="">
+                                <form action="../../api/changeuserdata.php" enctype="multipart/form-data" method="post">
                                     <div class="card-body">
                                         <div class="form-group row">
                                             <div class="col-2">
@@ -86,7 +87,6 @@
                                                     <img  src="../../api/<?php echo$result[0]["picture"]; ?>" id="img" alt="profile">
                                                     <h5>ارفع صورة</h5>
                                                 </div>
-
                                             </div>
 
                                             <div class="col-10">
@@ -105,6 +105,7 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input2" class="col-2">الهاتف</label>
+                                                   
                                                     <div class="col-5 ">
                                                         <input type="number" name="number" class="form-control" value="<?php echo $result[0]["phone"]; ?>" id="">
                                                     </div>
@@ -116,14 +117,14 @@
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">النوع</label>
                                                     <div class="col-10"><select name="gender" class="form-control">
-                                                        <?php if( $result[0]["gender"]==0)
-                                                            echo'<option value="0">ذكر</option>
-                                                            <option value="1">مؤنث</option>';
-                                                           else
-                                                           echo'<option value="1">مؤنث</option>
-                                                           <option value="0">ذكر</option>';
-                                                           ?>
-                                                          </select>
+                                                    <?php if( $result[0]["gender"]==0)
+                                                        echo'<option value="0">ذكر</option>
+                                                        <option value="1">مؤنث</option>';
+                                                       else
+                                                       echo'<option value="1">مؤنث</option>
+                                                       <option value="0">ذكر</option>';
+                                                       ?>
+                                                      </select>
 
                                                     </div>
                                                 </div>
@@ -143,44 +144,43 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">المدينة</label>
-                                                    <div class="col-10"><select name="city" class="form-control ">
-                                                        <option value="<?php echo $city[0][0] ?>"><?php echo $city[0][1] ?></option>
-                                                            <?php
-                                                            for($i=0;$i<$cities_size;$i++)
-                                                            {
-                                                            echo '<option value="'.$cities[$i][0].'">'.$cities[$i][1].'</option>';
-                                                            }
-                                                            ?>
-                                                          </select>
+                                                    <div class="col-10 cities"><select name="city" class="form-control ">
+                                                    <option value="<?php echo $city[0][0] ?>"><?php echo $city[0][1] ?></option>
+                                                        <?php
+                                                        for($i=0;$i<$cities_size;$i++)
+                                                        {
+                                                        echo '<option value="'.$cities[$i][0].'">'.$cities[$i][1].'</option>';
+                                                        }
+                                                        ?>
+                                                      </select>
 
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">السن</label>
                                                     <div class="col-10"><select name="age" class="form-control">
-                                                        <?php if( $result[0]["age"]==0)
-                                                            echo'<option value="0">18-25</option>
-                                                            <option value="1">25-40</option>
-                                                            <option value="2">40-60</option>';
-                                                           elseif( $result[0]["age"]==1)
-                                                           echo'<option value="1">25-40</option>
-                                                           <option value="0">18-25</option>
-                                                           <option value="2">40-60</option>';
-                                                          else
-                                                           echo' <option value="2">40-60</option>
-                                                           <option value="0">18-25</option>
-                                                           <option value="1">25-40</option>
-                                                          ';
-                                                           ?>
-                                                          </select>
+                                                    <?php if( $result[0]["age"]==0)
+                                                        echo'<option value="0">18-25</option>
+                                                        <option value="1">25-40</option>
+                                                        <option value="2">40-60</option>';
+                                                       elseif( $result[0]["age"]==1)
+                                                       echo'<option value="1">25-40</option>
+                                                       <option value="0">18-25</option>
+                                                       <option value="2">40-60</option>';
+                                                      else
+                                                       echo' <option value="2">40-60</option>
+                                                       <option value="0">18-25</option>
+                                                       <option value="1">25-40</option>
+                                                      ';
+                                                       ?>
+                                                      </select>
 
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <a href="Control.html"> <button type="button" class="btn btn-danger btn-fw">مسح</button></a>
+                                            <a href="Control.html"> <button type="submit" style="float:left" class="btn btn-outline-primary btn-round">تعديل</button></a>
                                         </div>
-                                        <a href="Control.html"> <button type="button" class="btn btn-danger btn-fw">مسح</button></a>
-                                        <a href="Control.html"> <button type="submit" style="float:left" class="btn btn-outline-primary btn-round">تعديل</button></a>
                                 </form>
                                 </div>
                             </div>
@@ -200,7 +200,8 @@
                                                     <th> خيارات </th>
                                                 </tr>
                                             </thead>
-                                            <tbody> <?php 
+                                            <tbody>
+                                                <?php 
                                                 for($i=0;$i<$stores_size;$i++)
                                                 {
                                                    
@@ -247,7 +248,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php 
+                                            <?php 
                                                 for($i=0;$i<$magazines_size;$i++)
                                                 {
                                                     $stmt=$conn->prepare("select name,image  from store where  id in (select store from store_branch where id in (select branch from magazine_branch where id ='".$magazines[$i]['id']."'));");
@@ -292,7 +293,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php 
+                                            <?php 
                                                 for($i=0;$i<$code_size;$i++)
                                                 {
                                                     $stmt=$conn->prepare("select name,image  from store where  id in  (select store_Id from store_code where code ='".$code[$i]['code']."');");
@@ -362,55 +363,55 @@
     <!-- Custom js for this page -->
     <script src="../../assets/js/dashboard.js"></script>
     <script src="../../assets/js/todolist.js"></script>
-    <script>
-        function display(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-        
-                    reader.onload = function (e) {
-                        $('#img')
-                            .attr('src', e.target.result)
-                            
-                    };
-        
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-        </script>
-        <script>
-            function a(x)
-            {
-                
-                $('.phone-code').html('');
-                $.ajax({
-              url: "../../api/phonebycountry.php",
-              method: "POST",
-              data: {
-                  city : document.getElementById('country').value
-              },
-              success: function (data) {
-                setTimeout(function(){
-                  $('.phone-code').html(data);
-                 
-              },800)
-              }
-            });
-                $('.cities').html('');
-                $.ajax({
-              url: "../../api/citiesbycountry.php",
-              method: "POST",
-              data: {
-                  city : document.getElementById('country').value
-              },
-              success: function (data) {
-                setTimeout(function(){
-                  $('.cities').html(data);
-              },800)
-              }
-            });
-            }
-            </script>
     <!-- End custom js for this page -->
+    <script>
+    function display(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+    
+                reader.onload = function (e) {
+                    $('#img')
+                        .attr('src', e.target.result)
+                        
+                };
+    
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <script>
+        function a(x)
+        {
+            
+            $('.phone-code').html('');
+            $.ajax({
+          url: "../../api/phonebycountry.php",
+          method: "POST",
+          data: {
+              city : document.getElementById('country').value
+          },
+          success: function (data) {
+            setTimeout(function(){
+              $('.phone-code').html(data);
+             
+          },800)
+          }
+        });
+            $('.cities').html('');
+            $.ajax({
+          url: "../../api/citiesbycountry.php",
+          method: "POST",
+          data: {
+              city : document.getElementById('country').value
+          },
+          success: function (data) {
+            setTimeout(function(){
+              $('.cities').html(data);
+          },800)
+          }
+        });
+        }
+        </script>
     <script>
         $(document).ready(function() {
             $('#tableId').DataTable();
