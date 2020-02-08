@@ -3,7 +3,7 @@
     date_default_timezone_set('Asia/Riyadh');
     $currentDateTime=date('Y-m-d');
     $newDateTime = date('Y-m-d', strtotime($currentDateTime));
-    $sql="select product_id	, photo from addvertisement where end_date >  '$newDateTime' and product_id in ( select id from product where   product.country in( select country from users where users.id = ?))";
+    $sql="select product_id	, photo from addvertisement where end_date >=  '$newDateTime' and country in( select country from users where users.id = ?)";
 $stmt=$conn->prepare($sql);
 $stmt->execute(array((int)$_GET['user_id']));
 $result=$stmt->fetchAll();

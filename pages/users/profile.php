@@ -82,10 +82,10 @@ $result=$stmt->fetchAll();
                                     <div class="card-body">
                                         <div class="form-group row">
                                             <div class="col-2">
-                                                <div class="nav-profile-image">
+                                                <div onclick="pro1()" class="nav-profile-image">
                                                     <input style="display:none;" name="image" type="file" id="file" onchange="display(this);">
-                                                    <img onclick="pro1()" src="../../api/<?php echo$result[0]["picture"]; ?>" id="img" alt="profile">
-                                                   
+                                                    <img  src="../../api/<?php echo$result[0]["picture"]; ?>" id="img" alt="profile">
+                                                    <h5>ارفع صورة</h5>
                                                 </div>
                                             </div>
 
@@ -178,6 +178,7 @@ $result=$stmt->fetchAll();
                                                     </div>
                                                 </div>
                                             </div>
+                                            <a href="Control.html"> <button type="button" class="btn btn-danger btn-fw">مسح</button></a>
                                             <a href="Control.html"> <button type="submit" style="float:left" class="btn btn-outline-primary btn-round">تعديل</button></a>
                                         </div>
                                 </form>

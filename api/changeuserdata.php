@@ -14,16 +14,25 @@ echo'
         $id =(int)$_POST['id'];
 
         $file_get = $_FILES['image']['name'];
+        if(empty($file_get))
+         $u=0;
+         else
+         {
+           echo $file_get.' aaa';;
+           $u=1;
         $temp = $_FILES['image']['tmp_name'];
         $file = "assets/user/".$file_get; 
         move_uploaded_file($temp, $file);
+         }
 
-
-        $sql="UPDATE `users` SET `name`=?,`picture`=?,`email`=?,`gender`=?,`country`=?,`city`=?,`phone`=?,`age`=? WHERE  id=?;";
+        $sql="UPDATE `users` SET `name`=?,`email`=?,`gender`=?,`country`=?,`city`=?,`phone`=?,`age`=? ";
+        if($u==1)
+         $sql .=",`picture`='$file' ";
+        $sql .="WHERE  id=?;";
 	$stmt=$conn->prepare($sql);
-    $stmt->execute(array($name,$file,$email,$gender,$country,$city,$number,$age,$id));
+    $stmt->execute(array($name,$email,$gender,$country,$city,$number,$age,$id));
     // header("location:../pages/users/users.php");
-   if($stmt->rowCount()>0)
+  if($stmt->rowCount()>0)
      echo'<script> document.getElementById("user").submit();</script>';
      else
       echo '<script> alert("no updated data")</script>';

@@ -5186,6 +5186,36 @@ fieldset:disabled a.btn {
     border-color: #d0ae01;
 }
 
+.input[type="file"] {
+    display: block;
+}
+
+.imageThumb {
+    max-height: 75px;
+    border: 2px solid;
+    padding: 1px;
+    cursor: pointer;
+}
+
+.pip {
+    display: inline-block;
+    margin: 10px 10px 0 0;
+}
+
+.remove {
+    display: block;
+    background: #444;
+    border: 1px solid black;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.remove:hover {
+    background: white;
+    color: black;
+}
+
 .btn-warning:not(:disabled):not(.disabled):active:focus,
 .btn-warning:not(:disabled):not(.disabled).active:focus,
 .show>.btn-warning.dropdown-toggle:focus {
@@ -5195,8 +5225,8 @@ fieldset:disabled a.btn {
 
 .btn-danger {
     color: #212529;
-    background-color: #fe7c96;
-    border-color: #fe7c96;
+    background-color: #f73f64;
+    border-color: #f7113f;
 }
 
 .btn-danger:hover {
@@ -14777,8 +14807,8 @@ code {
 }
 
 .btn.btn-icon {
-    width: 42px;
-    height: 42px;
+    width: 20px;
+    height: 25px;
     padding: 0;
 }
 
@@ -15765,7 +15795,7 @@ code {
 
 .btn-gradient-danger {
     background: -webkit-gradient(linear, left top, right top, from(#ffbf96), to(#fe7096));
-    background: linear-gradient(to right, #ffbf96, #fe7096);
+    background: linear-gradient(to right, #ef5072, #ed144e);
     border: 0;
     -webkit-transition: opacity 0.3s ease;
     transition: opacity 0.3s ease;
@@ -16810,7 +16840,7 @@ select.form-control {
     padding: .4375rem .75rem;
     border: 0;
     outline: 1px solid #ebedf2;
-    color: #c9c8c8;
+    color: #1c1c1c;
 }
 
 select.form-control:focus {
