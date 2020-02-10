@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Orody Admin</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
-    <link rel="stylesheet" href="../../assets/\css\dataTables.css">
+
+    <link rel="stylesheet" href="../assets/css/dataTables.css">
     <!-- End layout styles -->
 
-    <link rel="shortcut icon" href="../../assets/images/favicon.png">
+    <link rel="shortcut icon" href="../assets/images/favicon.png">
 </head>
 
 <body class="">
@@ -49,8 +50,8 @@
 
             </div>
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo" href="../home.html"><img src="../../assets/images/logo.png" alt="logo"></a>
-                <a class="navbar-brand brand-logo-mini" href="../home.html"><img src="../../assets/images/logo-mini.png" alt="logo"></a>
+                <a class="navbar-brand brand-logo" ><img src="../assets/images/logo.png" alt="logo"></a>
+                <a class="navbar-brand brand-logo-mini" ><img src="../assets/images/logo-mini.png" alt="logo"></a>
             </div>
         </nav>
         <!-- partial -->
@@ -59,75 +60,12 @@
                 <div class="content-wrapper">
                     <div class="page-header">
                         <h3 class="page-title">
-                            إدارة الفئات
+                            الرئيسية
                             <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                <i class="mdi mdi-xaml menu-icon"></i>
+                <i class="mdi mdi-home"></i>
               </span> </h3>
                     </div>
 
-                    <div class="row">
-                        <div class="col-12 grid-margin">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="addSubCategory.html"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة فئة جانبية </button></a>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <h4 class="card-title">جدول الفئات</h4>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table id="tableId" class="rtl table">
-                                            <thead>
-                                                <tr>
-                                                    <th> الفئة </th>
-                                                    <th> القسم </th>
-                                                    <th> خيارات </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="../../assets//images/faces/face1.jpg" class="mr-2" alt="image"> محمد حسام الدين </td>
-                                                    <td> 01003989594 </td>
-                                                    <td>
-                                                        <a href="addSubCategory.html"><label class="badge badge-gradient-info">صفحه القسم</label></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="../../assets//images/faces/face2.jpg" class="mr-2" alt="image"> أحمد حسام الدين </td>
-                                                    <td> 01112316755 </td>
-                                                    <td>
-                                                        <a href="addSubCategory.html"><label class="badge badge-gradient-info">صفحه القسم</label></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="../../assets//images/faces/face3.jpg" class="mr-2" alt="image"> ياسين حسام الدين </td>
-                                                    <td> 01019722416 </td>
-                                                    <td>
-                                                        <a href="addSubCategory.html"><label class="badge badge-gradient-info">صفحه القسم</label></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="../../assets//images/faces/face4.jpg" class="mr-2" alt="image"> عادل حسام الدين </td>
-                                                    <td> 01003989594 </td>
-                                                    <td>
-                                                        <a href="addSubCategory.html"><label class="badge badge-gradient-info">صفحه القسم</label></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- partial -->
             </div>
@@ -142,66 +80,78 @@
                                 <span class="text-secondary text-small">Project Manager</span>
                             </div>
                             <div class="nav-profile-image">
-                                <img src="../../assets/images/faces/face1.jpg" alt="profile">
+                                <img src="../assets/images/faces/face1.jpg" alt="profile">
                                 <span class="login-status online"></span>
                                 <!--change to offline or busy as needed-->
                             </div>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../home.html">
+                        <a class="nav-link" href="home.php">
                             <span class="menu-title">الرئيسية</span>
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="ads/ads.php">
                             <span class="menu-title">إدارة الاعلانات</span>
-                            <i class="mdi mdi-xaml menu-icon"></i>
+                            <i class="mdi mdi mdi-xaml menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/mdi.html">
+                        <a class="nav-link" href="subcategory/subcategory.php">
                             <span class="menu-title">اضافة فئة جانبية</span>
                             <i class="mdi mdi-folder-plus menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../users/users.html">
+                        <a class="nav-link" href="users/users.php">
                             <span class="menu-title">إدارة المستخدمين</span>
                             <i class="mdi mdi-account-settings menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/mdi.html">
+                        <a class="nav-link" href="brand/brand.php">
+                            <span class="menu-title">إدارة الماركات</span>
+                            <i class="mdi mdi-bookmark-plus-outline menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="stores/stores.php">
                             <span class="menu-title">إدارة المتاجر</span>
                             <i class="mdi mdi-store menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/mdi.html">
+                        <a class="nav-link" href="product/product.php">
                             <span class="menu-title">إدارة المنتجات</span>
                             <i class="mdi mdi-cart-outline menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/mdi.html">
+                        <a class="nav-link" href="coupons/coupons.php">
                             <span class="menu-title">إدارة الأكواد</span>
                             <i class="mdi mdi-barcode menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/mdi.html">
+                        <a class="nav-link" href="offers/offers.php">
                             <span class="menu-title">إدارة العروض</span>
                             <i class="mdi mdi-check-circle-outline menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/mdi.html">
+                        <a class="nav-link" href="deals/deals.php">
                             <span class="menu-title">إدارة الصفقات</span>
                             <i class="mdi mdi-exclamation menu-icon"></i>
                         </a>
-
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="magazines/magazines.php">
+                            <span class="menu-title">إدارة النشرات</span>
+                            <i class="mdi mdi-newspaper menu-icon"></i>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- partial -->
@@ -216,23 +166,23 @@
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="../assets/vendors/js/vendor.bundle.base.js"></script>
 
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
 
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="../../assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="../assets/vendors/chart.js/Chart.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../assets/js/off-canvas.js"></script>
-    <script src="../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../assets/js/misc.js"></script>
+    <script src="../assets/js/off-canvas.js"></script>
+    <script src="../assets/js/hoverable-collapse.js"></script>
+    <script src="../assets/js/misc.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script src="../../assets/js/dashboard.js"></script>
-    <script src="../../assets/js/todolist.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+    <script src="../assets/js/todolist.js"></script>
     <!-- End custom js for this page -->
     <script>
         $(document).ready(function() {

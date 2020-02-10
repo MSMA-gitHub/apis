@@ -83,7 +83,7 @@
                                             <div class="col-2">
                                                 <div onclick="pro1()" class="nav-profile-image">
                                                     <input style="display:none;" name="image" type="file" id="file" onchange="display(this);">
-                                                    <img  src="../../api/<?php echo$result[0]["picture"]; ?>" id="img" alt="profile">
+                                                    <img style="max-width:100%" src="../../api/<?php echo$result[0]["picture"]; ?>" id="img" alt="profile">
                                                     <h5>ارفع صورة</h5>
                                                 </div>
 

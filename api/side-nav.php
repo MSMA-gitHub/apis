@@ -16,19 +16,19 @@ echo'<nav class="sidebar sidebar-offcanvas" id="sidebar">
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../home.html">
+                        <a class="nav-link" href="../home.php">
                             <span class="menu-title">الرئيسية</span>
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../ads/ads.html">
+                        <a class="nav-link" href="../ads/ads.php">
                             <span class="menu-title">إدارة الاعلانات</span>
                             <i class="mdi mdi mdi-xaml menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../subcategory/subcategory.html">
+                        <a class="nav-link" href="../subcategory/subcategory.php">
                             <span class="menu-title">اضافة فئة جانبية</span>
                             <i class="mdi mdi-folder-plus menu-icon"></i>
                         </a>
@@ -40,43 +40,43 @@ echo'<nav class="sidebar sidebar-offcanvas" id="sidebar">
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../brand/brand.html">
+                        <a class="nav-link" href="../brand/brand.php">
                             <span class="menu-title">إدارة الماركات</span>
                             <i class="mdi mdi-bookmark-plus-outline menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../stores/stores.html">
+                        <a class="nav-link" href="../stores/stores.php">
                             <span class="menu-title">إدارة المتاجر</span>
                             <i class="mdi mdi-store menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../product/product.html">
+                        <a class="nav-link" href="../product/product.php">
                             <span class="menu-title">إدارة المنتجات</span>
                             <i class="mdi mdi-cart-outline menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../coupons/coupons.html">
+                        <a class="nav-link" href="../coupons/coupons.php">
                             <span class="menu-title">إدارة الأكواد</span>
                             <i class="mdi mdi-barcode menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../offers/offers.html">
+                        <a class="nav-link" href="../offers/offers.php">
                             <span class="menu-title">إدارة العروض</span>
                             <i class="mdi mdi-check-circle-outline menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../deals/deals.html">
+                        <a class="nav-link" href="../deals/deals.php">
                             <span class="menu-title">إدارة الصفقات</span>
                             <i class="mdi mdi-exclamation menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../magazines/magazines.html">
+                        <a class="nav-link" href="../magazines/magazines.php">
                             <span class="menu-title">إدارة النشرات</span>
                             <i class="mdi mdi-newspaper menu-icon"></i>
                         </a>

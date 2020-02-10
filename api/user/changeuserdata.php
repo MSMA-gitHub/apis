@@ -18,11 +18,10 @@ echo'
          $u=0;
          else
          {
-           echo $file_get.' aaa';;
            $u=1;
         $temp = $_FILES['image']['tmp_name'];
         $file = "assets/user/".$file_get; 
-        move_uploaded_file($temp, $file);
+        move_uploaded_file($temp, "../".$file);
          }
 
         $sql="UPDATE `users` SET `name`=?,`email`=?,`gender`=?,`country`=?,`city`=?,`phone`=?,`age`=? ";
@@ -35,5 +34,7 @@ echo'
   if($stmt->rowCount()>0)
      echo'<script> document.getElementById("user").submit();</script>';
      else
-      echo '<script> alert("no updated data")</script>';
+      echo '<script> alert("no updated data");
+      document.getElementById("user").submit();
+      </script>';
     ?>
