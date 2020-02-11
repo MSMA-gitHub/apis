@@ -129,7 +129,7 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">الدولة</label>
-                                                    <div class="col-10"><select name="country" id="country" class="form-control" onchange="a(<?php echo $country[0][2] ?>)">
+                                                    <div class="col-10"><select name="country" id="country" class="form-control" onchange="a()">
                                                         <option value="<?php echo $country[0][0] ?>"><?php echo $country[0][1] ?></option>
                                                         <?php
                                                         for($i=0;$i<$countries_size;$i++)
@@ -143,7 +143,7 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">المدينة</label>
-                                                    <div class="col-10"><select name="city" class="form-control ">
+                                                    <div class="col-10"><select name="city" class="form-control cities">
                                                         <option value="<?php echo $city[0][0] ?>"><?php echo $city[0][1] ?></option>
                                                             <?php
                                                             for($i=0;$i<$cities_size;$i++)
@@ -395,7 +395,7 @@
               }
             });
             }
-            function a(x)
+            function a()
             {
                 
                 $('.phone-code').html('');
