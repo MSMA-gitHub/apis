@@ -116,112 +116,29 @@ $m_size=$stmt->rowcount();
                                                     <th> الدولة </th>
                                                     <th> المدينة </th>
                                                     <th> مواعيد العمل </th>
-                                                    <th> خيارات </th>
+                                                    
+                                                    <th> السبت </th>
+                                                                    <th> الأحد </th>
+                                                                    <th> الأثنين </th>
+                                                                    <th> الثلاثاء </th>
+                                                                    <th> الأربعاء </th>
+                                                                    <th> الخميس </th>
+                                                                    <th> الجمعة </th>
+                                                                    <th> خيارات </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td> الصين </td>
                                                     <td> ووهانج </td>
-                                                    <td >
-                                                        <div class="table-responsive">
-                                                            <table id="" class="ltr table">
-                                                                <thead>
-                                                                    <th> السبت </th>
-                                                                    <th> الأحد </th>
-                                                                    <th> الأثنين </th>
-                                                                    <th> الثلاثاء </th>
-                                                                    <th> الأربعاء </th>
-                                                                    <th> الخميس </th>
-                                                                    <th> الجمعة </th>
-                                                                </thead>
-                                                                <tbody>
+                                                    <td></td>
+                                                    <td> 08:00 - 12:00 </td>
                                                                     <td> 08:00 - 12:00 </td>
                                                                     <td> 08:00 - 12:00 </td>
                                                                     <td> 08:00 - 12:00 </td>
                                                                     <td> 08:00 - 12:00 </td>
                                                                     <td> 08:00 - 12:00 </td>
                                                                     <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                </tbody>
-                                                            </table>
-
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="row">
-                                                            <a href="addBranch.html"><label class="badge badge-gradient-info">صفحه الفرع</label></a>
-                                                            <button onclick="confirm(' سيتم مسح الفرع ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
-                                                                <i class="mdi mdi-close"></i>
-                                                              </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td> الصين </td>
-                                                    <td> ووهانج </td>
-                                                    <td >
-                                                        <div class="table-responsive">
-                                                            <table id="" class="ltr table">
-                                                                <thead>
-                                                                    <th> السبت </th>
-                                                                    <th> الأحد </th>
-                                                                    <th> الأثنين </th>
-                                                                    <th> الثلاثاء </th>
-                                                                    <th> الأربعاء </th>
-                                                                    <th> الخميس </th>
-                                                                    <th> الجمعة </th>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                </tbody>
-                                                            </table>
-
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="row">
-                                                            <a href="addBranch.html"><label class="badge badge-gradient-info">صفحه الفرع</label></a>
-                                                            <button onclick="confirm(' سيتم مسح الفرع ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
-                                                                <i class="mdi mdi-close"></i>
-                                                              </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td> الصين </td>
-                                                    <td> ووهانج </td>
-                                                    <td >
-                                                        <div class="table-responsive">
-                                                            <table id="" class="ltr table">
-                                                                <thead>
-                                                                    <th> السبت </th>
-                                                                    <th> الأحد </th>
-                                                                    <th> الأثنين </th>
-                                                                    <th> الثلاثاء </th>
-                                                                    <th> الأربعاء </th>
-                                                                    <th> الخميس </th>
-                                                                    <th> الجمعة </th>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                </tbody>
-                                                            </table>
-
-                                                        </div>
-                                                    </td>
                                                     <td>
                                                         <div class="row">
                                                             <a href="addBranch.html"><label class="badge badge-gradient-info">صفحه الفرع</label></a>
