@@ -1,3 +1,26 @@
+<?php
+require '../../api/db.php';
+$s=$_POST['id'];
+$stmt=$conn->prepare("select * from store  where id=?;");
+$stmt->execute(array($s));
+$result=$stmt->fetchAll();
+$stmt=$conn->prepare("select *  from store_branch where store= ?;");
+$stmt->execute(array($s));
+$branch=$stmt->fetchAll();
+$b_size=$stmt->rowcount();
+$stmt=$conn->prepare("select *  from code where id in (select code from store_code where store_id= ?) and( type = 0 or type = 1);");
+$stmt->execute(array($s));
+$code=$stmt->fetchAll();
+$c_size=$stmt->rowcount();
+$stmt=$conn->prepare("select *  from code where id in (select code from store_code where store_id= ?) and( type = 2 or type = 3 or type = 4);");
+$stmt->execute(array($s));
+$offers=$stmt->fetchAll();
+$o_size=$stmt->rowcount();
+$stmt=$conn->prepare("select *  from magazine where id in (select id from magazine_branch where store= ?) ;");
+$stmt->execute(array($s));
+$magazine=$stmt->fetchAll();
+$m_size=$stmt->rowcount();
+?>
 <html lang="en">
 
 <head>
@@ -36,36 +59,37 @@
                     <div class="row">
                         <div class="rtl col-12 grid-margin">
                             <div class="card">
-                                <form action="" onchange="validatyCoupon()">
-                                    <div class="card-body">
+                            <form action="../../api/store/editstore.php" enctype="multipart/form-data" method="post">
+                                <div class="card-body">
                                         <div class="form-group row">
                                             <div class="col-2">
-                                                <div onclick="pro1()" class="nav-profile-image">
-                                                    <input style="display:none;" type="file" id="file" required>
-                                                    <img src="../../assets/images/faces/face1.jpg" alt="profile">
+                                            <div onclick="pro1()" class="nav-profile-image">
+                                                    <input style="display:none;" type="file" id="file" name="image"  onchange="display(this);">
+                                                    <img src="../../api/<?php echo $result[0]['image'];?>" style="max-width:100%" id="img" >
                                                     <h5>ارفع صورة</h5>
                                                 </div>
-
+                                                <input type="hidden" name="id" value="<?php echo $result[0][0];?>"/>
                                             </div>
                                             <div class="col-10">
 
                                                 <div class="form-group row">
                                                     <label for="example-search-input2" class="col-2">اسم المتجر باللغة العربية</label>
                                                     <div class="col-10">
-                                                        <input placeholder="مثال : بندا" type="text" name="name" class="form-control" value="" id="" required>
+                                                        <input placeholder="مثال : بندا" type="text" name="name" class="form-control" value="<?php echo $result[0][1];?>" id="" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input2" class="col-2">اسم بالمتجر باللغة الانجليزية</label>
                                                     <div class="col-10">
-                                                        <input placeholder="مثال : panda" type="text" name="name" class="form-control" value="" id="" required>
+                                                        <input placeholder="مثال : panda" type="text" name="name" class="form-control" value="<?php echo $result[0][3];?>" id="" required>
                                                     </div>
                                                 </div>
                                             </div>
 
 
                                         </div>
-                                        <a href="Control.html"> <button type="button" class="btn btn-danger btn-fw">مسح</button></a>
+                                        <a onclick="delete_add(<?php echo$_POST['id']; ?>);"> <button type="button" class="btn btn-danger btn-fw">مسح</button></a>
+                                         
                                         <a href="Control.html"> <button type="submit" style="float:left" class="btn btn-outline-primary btn-round">تعديل</button></a>
                                 </form>
                                 </div>
@@ -99,7 +123,81 @@
                                                 <tr>
                                                     <td> الصين </td>
                                                     <td> ووهانج </td>
+                                                    <td >
+                                                        <div class="table-responsive">
+                                                            <table id="" class="ltr table">
+                                                                <thead>
+                                                                    <th> السبت </th>
+                                                                    <th> الأحد </th>
+                                                                    <th> الأثنين </th>
+                                                                    <th> الثلاثاء </th>
+                                                                    <th> الأربعاء </th>
+                                                                    <th> الخميس </th>
+                                                                    <th> الجمعة </th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </td>
                                                     <td>
+                                                        <div class="row">
+                                                            <a href="addBranch.html"><label class="badge badge-gradient-info">صفحه الفرع</label></a>
+                                                            <button onclick="confirm(' سيتم مسح الفرع ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                                <i class="mdi mdi-close"></i>
+                                                              </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> الصين </td>
+                                                    <td> ووهانج </td>
+                                                    <td >
+                                                        <div class="table-responsive">
+                                                            <table id="" class="ltr table">
+                                                                <thead>
+                                                                    <th> السبت </th>
+                                                                    <th> الأحد </th>
+                                                                    <th> الأثنين </th>
+                                                                    <th> الثلاثاء </th>
+                                                                    <th> الأربعاء </th>
+                                                                    <th> الخميس </th>
+                                                                    <th> الجمعة </th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                    <td> 08:00 - 12:00 </td>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <a href="addBranch.html"><label class="badge badge-gradient-info">صفحه الفرع</label></a>
+                                                            <button onclick="confirm(' سيتم مسح الفرع ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                                <i class="mdi mdi-close"></i>
+                                                              </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> الصين </td>
+                                                    <td> ووهانج </td>
+                                                    <td >
                                                         <div class="table-responsive">
                                                             <table id="" class="ltr table">
                                                                 <thead>
@@ -322,6 +420,26 @@
     <script src="../../assets/js/file-upload.js"></script>
 
     <script src="../../assets/js/bootstrap-select.min.js"></script>
+    <script>
+        function delete_add(x)
+        {
+            if(confirm(' سيتم مسح المتجر و كل المنتجات التابعه له  ! '))
+            {
+            $.ajax({
+              url: "../../api/store/delete_store.php",
+              method: "POST",
+              data: {
+                  id : x
+              },
+              success: function (data) {
+                setTimeout(function(){
+                  window.location.href="stores.php";
+              },800)
+              }
+            });
+        }
+    }
+        </script>
     <script>
         $(document).ready(function() {
             $('#tableId').DataTable();

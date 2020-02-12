@@ -1,3 +1,10 @@
+<?php
+require '../../api/db.php';
+$stmt=$conn->prepare("select * from store ;");
+$stmt->execute();
+$result=$stmt->fetchAll();
+$size=$stmt->rowcount();
+?>
 <html lang="en">
 
 <head>
@@ -36,10 +43,10 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="addStore.html"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة متجر </button></a>
+                                            <a href="addStore.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة متجر </button></a>
                                         </div>
                                         <div class="col-sm-7">
-                                            <h4 class="card-title">جدول المنتجات</h4>
+                                            <h4 class="card-title">جدول المتاجر</h4>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -57,22 +64,44 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <?php
+                                                for($i=0;$i<$size;$i++)
+                                                {
+                                                    $stmt=$conn->prepare("select count(id)  from store_branch where store= ?;");
+                                                    $stmt->execute(array($result[$i][0]));
+                                                    $branch=$stmt->fetchAll();
+                                                    $stmt=$conn->prepare("select count(id)  from code where id in (select code from store_code where store_id= ?) and( type = 0 or type = 1);");
+                                                    $stmt->execute(array($result[$i][0]));
+                                                    $code=$stmt->fetchAll();
+                                                    $stmt=$conn->prepare("select count(id)  from code where id in (select code from store_code where store_id= ?) and( type = 2 or type = 3 or type = 4);");
+                                                    $stmt->execute(array($result[$i][0]));
+                                                    $offers=$stmt->fetchAll();
+                                                    $stmt=$conn->prepare("select count(id)  from magazine where id in (select id from magazine_branch where store= ?) ;");
+                                                    $stmt->execute(array($result[$i][0]));
+                                                    $magazine=$stmt->fetchAll();
+                                               ?>
                                                 <tr>
                                                     <td>
-                                                        <img src="../../assets//images/faces/face1.jpg" class="mr-2" alt="image"> بندا </td>
-                                                    <td> 1 </td>
-                                                    <td> 3 </td>
-                                                    <td> 5 </td>
-                                                    <td> 7 </td>
+                                                        <img src="../../api/<?php echo $result[$i]['image'];?>" class="mb-2 mh-50 rounded" alt="image"> <?php echo $result[$i]['name'];?> </td>
+                                                    <td> <?php echo $branch[0][0];?> </td>
+                                                    <td> <?php echo $offers[0][0];?> </td>
+                                                    <td> <?php echo $magazine[0][0];?> </td>
+                                                    <td> <?php echo $code[0][0];?> </td>
                                                     <td>
-                                                        <div class="row">
-                                                            <a href="addStore.html"><label class="badge badge-gradient-info">صفحه المتجر</label></a>
-                                                            <button onclick="confirm(' سيتم مسح الاعلان ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                    <div class="row">
+                                                        <form id="store<?php echo$result[$i][0]; ?>" action="store.php" method="POST"> <input type="hidden" name="id" value="<?php echo $result[$i][0]; ?>">
+                                                       <a onclick="document.getElementById('store<?php echo$result[$i][0]; ?>').submit();"><label class="badge badge-gradient-info">صفحه المتجر</label></a></form>
+                                                             <a style="width:30px"></a>
+                                                             <form id="delete<?php echo$result[$i][0]; ?>" action="../../api/store/delete_store.php" method="POST"> <input type="hidden" name="id" value="<?php echo$result[$i][0]; ?>">
+                                                       <button onclick="delete_store(<?php echo$result[$i][0]; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                 <i class="mdi mdi-close"></i>
-                                                              </button>
+                                                              </button></form>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <?php
+                                                }
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -115,10 +144,10 @@
     <script src="../../assets/js/dashboard.js"></script>
     <script src="../../assets/js/todolist.js"></script>
     <script>
-        function delete_user(x)
+        function delete_store(x)
         {
             var v ='delete'+x;
-            if(confirm(' سيتم مسح المتجر ! '))
+            if(confirm(' سيتم مسح المتجر و كل المنتجات التابعه له  ! '))
             document.getElementById(v).submit();
         }
         </script>
