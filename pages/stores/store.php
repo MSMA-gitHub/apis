@@ -1,25 +1,26 @@
 <?php
 require '../../api/db.php';
-$s=$_POST['id'];
-$stmt=$conn->prepare("select * from store  where id=?;");
+$s = $_POST['id'];
+$stmt = $conn->prepare("select * from store  where id=?;");
 $stmt->execute(array($s));
-$result=$stmt->fetchAll();
-$stmt=$conn->prepare("select *  from store_branch where store= ?;");
+$result = $stmt->fetchAll();
+$stmt = $conn->prepare("select *  from store_branch where store= ?;");
 $stmt->execute(array($s));
-$branch=$stmt->fetchAll();
-$b_size=$stmt->rowcount();
-$stmt=$conn->prepare("select *  from code where id in (select code from store_code where store_id= ?) and( type = 0 or type = 1);");
+$branch = $stmt->fetchAll();
+$b_size = $stmt->rowcount();
+$stmt = $conn->prepare("select *  from code where id in (select code from store_code where store_id= ?) and( type = 0 or type = 1);");
 $stmt->execute(array($s));
-$code=$stmt->fetchAll();
-$c_size=$stmt->rowcount();
-$stmt=$conn->prepare("select *  from code where id in (select code from store_code where store_id= ?) and( type = 2 or type = 3 or type = 4);");
+$code = $stmt->fetchAll();
+$c_size = $stmt->rowcount();
+$stmt = $conn->prepare("select *  from code where id in (select code from store_code where store_id= ?) and( type = 2 or type = 3 or type = 4);");
 $stmt->execute(array($s));
-$offers=$stmt->fetchAll();
-$o_size=$stmt->rowcount();
-$stmt=$conn->prepare("select *  from magazine where id in (select id from magazine_branch where store= ?) ;");
+$offers = $stmt->fetchAll();
+$o_size = $stmt->rowcount();
+$stmt = $conn->prepare("select magazine.id,title,end_date,count(photo)  from magazine inner join magazine_photo on magazine.id= magazine_photo.id  where magazine.id in (select id from magazine_branch where store= ?) GROUP by magazine_photo.id order by end_date desc
+;");
 $stmt->execute(array($s));
-$magazine=$stmt->fetchAll();
-$m_size=$stmt->rowcount();
+$magazine = $stmt->fetchAll();
+$m_size = $stmt->rowcount();
 ?>
 <html lang="en">
 
@@ -44,7 +45,7 @@ $m_size=$stmt->rowcount();
 <body class="">
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
-        <?php include'../../api/nav.php';?>
+        <?php include '../../api/nav.php';?>
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <div class="main-panel">
@@ -65,32 +66,32 @@ $m_size=$stmt->rowcount();
                                             <div class="col-2">
                                             <div onclick="pro1()" class="nav-profile-image">
                                                     <input style="display:none;" type="file" id="file" name="image"  onchange="display(this);">
-                                                    <img src="../../api/<?php echo $result[0]['image'];?>" style="max-width:100%" id="img" >
+                                                    <img src="../../api/<?php echo $result[0]['image']; ?>" style="max-width:100%" id="img" >
                                                     <h5>ارفع صورة</h5>
                                                 </div>
-                                                <input type="hidden" name="id" value="<?php echo $result[0][0];?>"/>
+                                                <input type="hidden" name="id" value="<?php echo $result[0][0]; ?>"/>
                                             </div>
                                             <div class="col-10">
 
                                                 <div class="form-group row">
                                                     <label for="example-search-input2" class="col-2">اسم المتجر باللغة العربية</label>
                                                     <div class="col-10">
-                                                        <input placeholder="مثال : بندا" type="text" name="name" class="form-control" value="<?php echo $result[0][1];?>" id="" required>
+                                                        <input placeholder="مثال : بندا" type="text" name="name" class="form-control" value="<?php echo $result[0][1]; ?>" id="" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input2" class="col-2">اسم بالمتجر باللغة الانجليزية</label>
                                                     <div class="col-10">
-                                                        <input placeholder="مثال : panda" type="text" name="name" class="form-control" value="<?php echo $result[0][3];?>" id="" required>
+                                                        <input placeholder="مثال : panda" type="text" name="name" class="form-control" value="<?php echo $result[0][3]; ?>" id="" required>
                                                     </div>
                                                 </div>
                                             </div>
 
 
                                         </div>
-                                        <a onclick="delete_add(<?php echo$_POST['id']; ?>);"> <button type="button" class="btn btn-danger btn-fw">مسح</button></a>
-                                         
-                                        <a href="Control.html"> <button type="submit" style="float:left" class="btn btn-outline-primary btn-round">تعديل</button></a>
+                                        <a onclick="delete_store(<?php echo $_POST['id']; ?>);"> <button type="button" class="btn btn-danger btn-fw">مسح</button></a>
+
+                                        <a > <button type="submit" style="float:left" class="btn btn-outline-primary btn-round">تعديل</button></a>
                                 </form>
                                 </div>
                             </div>
@@ -101,7 +102,7 @@ $m_size=$stmt->rowcount();
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="addBranch.html"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة فرع </button></a>
+                                            <a href="addBranch.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة فرع </button></a>
                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول الفروع</h4>
@@ -115,8 +116,6 @@ $m_size=$stmt->rowcount();
                                                 <tr>
                                                     <th> الدولة </th>
                                                     <th> المدينة </th>
-                                                    <th> مواعيد العمل </th>
-                                                    
                                                     <th> السبت </th>
                                                                     <th> الأحد </th>
                                                                     <th> الأثنين </th>
@@ -128,26 +127,103 @@ $m_size=$stmt->rowcount();
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <?php
+for ($i = 0; $i < $b_size; $i++) {
+    $stmt = $conn->prepare("select country  from country where id= ?;");
+    $stmt->execute(array($branch[$i][2]));
+    $country = $stmt->fetchAll();
+    $stmt = $conn->prepare("select city  from city where id =?;");
+    $stmt->execute(array($branch[$i][3]));
+    $city = $stmt->fetchAll();
+    $o = 5;
+    $c = 12;
+    ?>
                                                 <tr>
-                                                    <td> الصين </td>
-                                                    <td> ووهانج </td>
-                                                    <td></td>
-                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
-                                                                    <td> 08:00 - 12:00 </td>
+                                                    <td> <?php echo $country[0][0]; ?> </td>
+                                                    <td> <?php echo $city[0][0]; ?> </td>
+
+                                                    <td> <?php
+if (empty($branch[$i][$o]) || empty($branch[$i][$c])) {
+        echo 'closed';
+    } else {
+        echo date('H:i', strtotime($branch[$i][$o])) . ' - ' . date('H:i', strtotime($branch[$i][$c]));
+    }
+
+    $o++;
+    $c++;
+    ?></td>
+                                                                    <td> <?php
+if (empty($branch[$i][$o]) || empty($branch[$i][$c])) {
+        echo 'closed';
+    } else {
+        echo date('H:i', strtotime($branch[$i][$o])) . ' - ' . date('H:i', strtotime($branch[$i][$c]));
+    }
+
+    $o++;
+    $c++;
+    ?></td>
+                                                                    <td> <?php
+if (empty($branch[$i][$o]) || empty($branch[$i][$c])) {
+        echo 'closed';
+    } else {
+        echo date('H:i', strtotime($branch[$i][$o])) . ' - ' . date('H:i', strtotime($branch[$i][$c]));
+    }
+
+    $o++;
+    $c++;
+    ?></td>
+                                                                    <td>  <?php
+if (empty($branch[$i][$o]) || empty($branch[$i][$c])) {
+        echo 'closed';
+    } else {
+        echo date('H:i', strtotime($branch[$i][$o])) . ' - ' . date('H:i', strtotime($branch[$i][$c]));
+    }
+
+    $o++;
+    $c++;
+    ?></td>
+                                                                    <td> <?php
+if (empty($branch[$i][$o]) || empty($branch[$i][$c])) {
+        echo 'closed';
+    } else {
+        echo date('H:i', strtotime($branch[$i][$o])) . ' - ' . date('H:i', strtotime($branch[$i][$c]));
+    }
+
+    $o++;
+    $c++;
+    ?> </td>
+                                                                    <td>  <?php
+if (empty($branch[$i][$o]) || empty($branch[$i][$c])) {
+        echo 'closed';
+    } else {
+        echo date('H:i', strtotime($branch[$i][$o])) . ' - ' . date('H:i', strtotime($branch[$i][$c]));
+    }
+
+    $o++;
+    $c++;
+    ?> </td>
+                                                                    <td>  <?php
+if (empty($branch[$i][$o]) || empty($branch[$i][$c])) {
+        echo 'closed';
+    } else {
+        echo date('H:i', strtotime($branch[$i][$o])) . ' - ' . date('H:i', strtotime($branch[$i][$c]));
+    }
+
+    ?> </td>
                                                     <td>
                                                         <div class="row">
-                                                            <a href="addBranch.html"><label class="badge badge-gradient-info">صفحه الفرع</label></a>
-                                                            <button onclick="confirm(' سيتم مسح الفرع ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                        <form id="branch<?php echo $branch[$i][0]; ?>" action="branch.php" method="POST"> <input type="hidden" name="id" value="<?php echo $branch[$i][0]; ?>">
+                                                       <a onclick="document.getElementById('branch<?php echo $branch[$i][0]; ?>').submit();"><label class="badge badge-gradient-info">صفحه الفرع</label></a></form>
+                                                             <a style="width:30px"></a>
+                                                             <form id="deleteB<?php echo $branch[$i][0]; ?>" action="../../api/store/delete_branch.php" method="POST"> <input type="hidden" name="id" value="<?php echo $branch[$i][0]; ?>">
+                                                       <button onclick="delete_branch(<?php echo $branch[$i][0]; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                 <i class="mdi mdi-close"></i>
-                                                              </button>
+                                                              </button></form>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <?php }
+?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -160,7 +236,7 @@ $m_size=$stmt->rowcount();
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="../magazines/addMagazine.html"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة نشرة </button></a>
+                                            <a href="../magazines/addMagazine.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة نشرة </button></a>
                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول النشرات</h4>
@@ -179,20 +255,29 @@ $m_size=$stmt->rowcount();
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php
+for ($i = 0; $i < $m_size; $i++) {
+
+    ?>
                                                 <tr>
                                                     <td>
-                                                        محمد حسام الدين </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
+                                                       <?php echo $magazine[$i][1]; ?></td>
+                                                    <td> <?php echo $magazine[$i][3] + 1; ?></td>
+                                                    <td> <?php echo $magazine[$i][2]; ?> </td>
                                                     <td>
                                                         <div class="row">
-                                                            <a href="../magazines/addMagazine.html"><label class="badge badge-gradient-info">صفحه النشرة</label></a>
-                                                            <button onclick="confirm(' سيتم مسح النشرة ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                        <form id="magazine<?php echo $magazine[$i][0]; ?>" action="../magazines/magazine.php" method="POST"> <input type="hidden" name="id" value="<?php echo $magazine[$i][0]; ?>">
+                                                       <a onclick="document.getElementById('magazine<?php echo $magazine[$i][0]; ?>').submit();"><label class="badge badge-gradient-info">صفحه النشره</label></a></form>
+                                                             <a style="width:30px"></a>
+                                                             <form id="deleteM<?php echo $magazine[$i][0]; ?>" action="../../api/magazine/delete_magazine.php" method="POST"> <input type="hidden" name="id" value="<?php echo $magazine[$i][0]; ?>">
+                                                       <button onclick="delete_magazine(<?php echo $magazine[$i][0]; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                 <i class="mdi mdi-close"></i>
-                                                              </button>
+                                                              </button></form>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <?php
+}?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -205,7 +290,7 @@ $m_size=$stmt->rowcount();
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="../coupons/addCoupon.html"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة كوبون </button></a>
+                                            <a href="../coupons/addCoupon.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة كوبون </button></a>
                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول الأكواد</h4>
@@ -217,7 +302,8 @@ $m_size=$stmt->rowcount();
                                         <table id="tableId3" class="rtl table">
                                             <thead>
                                                 <tr>
-                                                    <th> الكوبون </th>
+                                                    <th > الكوبون </th>
+                                                    <th>صورة الكوبون </th>
                                                     <th> نوع الكوبون </th>
                                                     <th> الكود </th>
                                                     <th> تاريخ الانتهاء </th>
@@ -225,21 +311,36 @@ $m_size=$stmt->rowcount();
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php 
+                                                for($i=0;$i<$c_size;$i++)
+                                                { ?>
                                                 <tr>
-                                                    <td>
-                                                        <img src="../../assets//images/faces/face1.jpg" class="mr-2" alt="image"> محمد حسام الدين </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
+                                                    <td><?php echo $code[$i]['title'];?>
+                                                        </td>
+                                                        <td>
+                                                        <img src="../../api/<?php echo $code[$i]['photo'];?>" class="mb-2 mh-50 rounded" alt="image">  </td>
+                                                    <td> <?php if($code[$i]['type']==0)
+                                                    echo 'خصم مبلغ';
+                                                    elseif($code[$i]['type']==1)
+                                                    echo'خصم نسبة ';
+                                                    ?> </td>
+                                                    <td> <?php echo $code[$i]['code'];?> </td>
+                                                    <td> <?php echo $code[$i]['end_date'];?> </td>
                                                     <td>
                                                         <div class="row">
-                                                            <a href="../coupons/addCoupon.html"><label class="badge badge-gradient-info">صفحه الكوبون</label></a>
-                                                            <button onclick="confirm(' سيتم مسح الكود ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                        <form id="code<?php echo $code[$i][0]; ?>" action="../coupons/coupon.php" method="POST"> <input type="hidden" name="id" value="<?php echo $code[$i][0]; ?>">
+                                                       <a onclick="document.getElementById('code<?php echo $code[$i][0]; ?>').submit();"><label class="badge badge-gradient-info">صفحه الكود</label></a></form>
+                                                             <a style="width:30px"></a>
+                                                             <form id="deleteC<?php echo $code[$i]['id']; ?>" action="../../api/code/delete_code.php" method="POST"> <input type="hidden" name="id" value="<?php echo $code[$i]['id']; ?>">
+                                                       <button onclick="delete_code(<?php echo $code[$i]['id']; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                 <i class="mdi mdi-close"></i>
-                                                              </button>
+                                                              </button></form>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <?php
+                                                }
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -252,7 +353,7 @@ $m_size=$stmt->rowcount();
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="../offers/addOffer.html"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة عرض </button></a>
+                                            <a href="../offers/addOffer.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة عرض </button></a>
                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول العروض</h4>
@@ -265,26 +366,43 @@ $m_size=$stmt->rowcount();
                                             <thead>
                                                 <tr>
                                                     <th> العرض </th>
+                                                    <th>صورة العرض </th>
                                                     <th> نوع العرض </th>
                                                     <th> تاريخ الانتهاء </th>
                                                     <th> خيارات </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php 
+                                                for($i=0;$i<$o_size;$i++)
+                                                {
+                                                    ?>
                                                 <tr>
-                                                    <td>
-                                                        <img src="../../assets//images/faces/face1.jpg" class="mr-2" alt="image"> محمد حسام الدين </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
+                                                    <td><?php echo $offers[$i]['title'];?></td>
+                                                <td>
+                                                        <img src="../../api/<?php echo $offers[$i]['photo'];?>" class="mb-2 mh-50 rounded" alt="image">  </td>
+                                                    <td> <?php if($offers[$i]['type']==2)
+                                                    echo 'هدية مجانية';
+                                                    elseif($offers[$i]['type']==3)
+                                                    echo'شحن مجاني ';
+                                                    else
+                                                    echo 'أخري'; ?>
+                                                     </td>
+                                                    <td><?php echo $offers[$i]['end_date'];?></td>
                                                     <td>
                                                         <div class="row">
-                                                            <a href="../offers/addOffer.html"><label class="badge badge-gradient-info">صفحه العرض</label></a>
-                                                            <button onclick="confirm(' سيتم مسح العرض ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                        <form id="code<?php echo $offers[$i]['id']; ?>" action="../offers/offer.php" method="POST"> <input type="hidden" name="id" value="<?php echo $offers[$i]['id']; ?>">
+                                                       <a onclick="document.getElementById('code<?php echo $offers[$i]['id']; ?>').submit();"><label class="badge badge-gradient-info">صفحه العرض</label></a></form>
+                                                             <a style="width:30px"></a>
+                                                             <form id="deleteC<?php echo $offers[$i]['id']; ?>" action="../../api/code/delete_code.php" method="POST"> <input type="hidden" name="id" value="<?php echo $offers[$i]['id']; ?>">
+                                                       <button onclick="delete_code(<?php echo $offers[$i]['id']; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                 <i class="mdi mdi-close"></i>
-                                                              </button>
+                                                              </button></form>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <?php
+                                                } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -300,7 +418,7 @@ $m_size=$stmt->rowcount();
             </div>
 
             <!-- partial:partials/_sidebar.html -->
-            <?php include'../../api/side-nav.php';?>
+            <?php include '../../api/side-nav.php';?>
             <!-- partial -->
 
             <!-- main-panel ends -->
@@ -338,7 +456,31 @@ $m_size=$stmt->rowcount();
 
     <script src="../../assets/js/bootstrap-select.min.js"></script>
     <script>
-        function delete_add(x)
+        function delete_branch(x)
+        {
+            var v ='deleteB'+x;
+            if(confirm(' سيتم مسح الفرع و كل المنتجات التابعه له  ! '))
+            document.getElementById(v).submit();
+        }
+        </script>
+         <script>
+        function delete_code(x)
+        {
+            var v ='deleteC'+x;
+            if(confirm(' سيتم مسح البيانات ! '))
+            document.getElementById(v).submit();
+        }
+        </script>
+        <script>
+        function delete_magazine(x)
+        {
+            var v ='deleteM'+x;
+            if(confirm(' سيتم مسح النشره بكل بيانتها '))
+            document.getElementById(v).submit();
+        }
+        </script>
+    <script>
+        function delete_store(x)
         {
             if(confirm(' سيتم مسح المتجر و كل المنتجات التابعه له  ! '))
             {
