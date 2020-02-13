@@ -1,3 +1,10 @@
+<?php
+require '../../api/db.php';
+$stmt=$conn->prepare("select id,name,price,brand,image,details,product_branch.store  from product inner join product_branch on product.id =product_branch.product ;");
+$stmt->execute();
+$result=$stmt->fetchAll();
+$size=$stmt->rowcount();
+?>
 <html lang="en">
 
 <head>
@@ -38,7 +45,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="addProduct.html"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة منتج </button></a>
+                                            <a href="addProduct.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة منتج </button></a>
                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول المنتجات</h4>
@@ -59,22 +66,36 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <?php
+                                                for($i=0;$i<$size;$i++)
+                                                {
+                                                    $stmt=$conn->prepare("select name  from store where id= ?;");
+                                                    $stmt->execute(array($result[$i]['store']));
+                                                    $store=$stmt->fetchAll();
+                                             
+                                               ?>
                                                 <tr>
                                                     <td>
-                                                        <img src="../../assets//images/faces/face1.jpg" class="mr-2" alt="image"> محمد حسام الدين </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
+                                                        <img src="../../api/<?php echo $result[$i]['image'];?>" class="mb-2 mh-50 rounded" alt="image"> <?php echo $result[$i]['name'];?> </td>
+                                                    <td> <?php echo $store[0][0];?> </td>
+                                                    <td> <?php echo $result[$i]['brand'];?> </td>
+                                                    <td> <?php echo $result[$i]['details'];?> </td>
+                                                    <td> <?php echo $result[$i]['price'];?> </td>
                                                     <td>
-                                                        <div class="row">
-                                                            <a href="addProduct.html"><label class="badge badge-gradient-info">صفحه القسم</label></a>
-                                                            <button onclick="confirm(' سيتم مسح الاعلان ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                    <div class="row">
+                                                        <form id="product<?php echo$result[$i]['id']; ?>" action="product.php" method="POST"> <input type="hidden" name="id" value="<?php echo$result[$i]['id']; ?>">
+                                                       <a onclick="document.getElementById('product<?php echo$result[$i]['id']; ?>').submit();"><label class="badge badge-gradient-info">صفحه الاعلان</label></a></form>
+                                                             <a style="width:30px"></a>
+                                                             <form id="delete<?php echo$result[$i]['id']; ?>" action="../../api/product/deleteproduct.php" method="POST"> <input type="hidden" name="id" value="<?php echo$result[$i]['id']; ?>">
+                                                       <button onclick="delete_product(<?php echo$result[$i]['id']; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                 <i class="mdi mdi-close"></i>
-                                                              </button>
+                                                              </button></form>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                              <?php
+                                                }
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -86,7 +107,7 @@
                 <!-- partial -->
             </div>
             <!-- partial:partials/_sidebar.html -->
-            <?php include'../../api/side-nav.php';?>
+            <?php include '../../api/side-nav.php'; ?>
             <!-- partial -->
 
             <!-- main-panel ends -->
@@ -116,6 +137,14 @@
     <!-- Custom js for this page -->
     <script src="../../assets/js/dashboard.js"></script>
     <script src="../../assets/js/todolist.js"></script>
+    <script>
+        function delete_product(x)
+        {
+            var v ='delete'+x;
+            if(confirm(' سيتم مسح الاعلان ! '))
+            document.getElementById(v).submit();
+        }
+        </script>
     <!-- End custom js for this page -->
     <script>
         $(document).ready(function() {

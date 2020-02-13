@@ -331,7 +331,7 @@ for ($i = 0; $i < $m_size; $i++) {
                                                         <form id="code<?php echo $code[$i][0]; ?>" action="../coupons/coupon.php" method="POST"> <input type="hidden" name="id" value="<?php echo $code[$i][0]; ?>">
                                                        <a onclick="document.getElementById('code<?php echo $code[$i][0]; ?>').submit();"><label class="badge badge-gradient-info">صفحه الكود</label></a></form>
                                                              <a style="width:30px"></a>
-                                                             <form id="deleteC<?php echo $code[$i]['id']; ?>" action="../../api/code/delete_code.php" method="POST"> <input type="hidden" name="id" value="<?php echo $code[$i]['id']; ?>">
+                                                             <form id="deleteC<?php echo $code[$i]['id']; ?>" action="../../api/code/deletecode.php?i=0" method="POST"> <input type="hidden" name="id" value="<?php echo $code[$i]['id']; ?>">
                                                        <button onclick="delete_code(<?php echo $code[$i]['id']; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                 <i class="mdi mdi-close"></i>
                                                               </button></form>
@@ -394,7 +394,7 @@ for ($i = 0; $i < $m_size; $i++) {
                                                         <form id="code<?php echo $offers[$i]['id']; ?>" action="../offers/offer.php" method="POST"> <input type="hidden" name="id" value="<?php echo $offers[$i]['id']; ?>">
                                                        <a onclick="document.getElementById('code<?php echo $offers[$i]['id']; ?>').submit();"><label class="badge badge-gradient-info">صفحه العرض</label></a></form>
                                                              <a style="width:30px"></a>
-                                                             <form id="deleteC<?php echo $offers[$i]['id']; ?>" action="../../api/code/delete_code.php" method="POST"> <input type="hidden" name="id" value="<?php echo $offers[$i]['id']; ?>">
+                                                             <form id="deleteC<?php echo $offers[$i]['id']; ?>" action="../../api/code/deletecode.php?i=1" method="POST"> <input type="hidden" name="id" value="<?php echo $offers[$i]['id']; ?>">
                                                        <button onclick="delete_code(<?php echo $offers[$i]['id']; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                 <i class="mdi mdi-close"></i>
                                                               </button></form>
