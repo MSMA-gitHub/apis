@@ -38,8 +38,18 @@
                                 <form action="">
                                     <div class="card-body">
                                         <div class="form-group row">
+                                        <div class="form-group row">
+                                                    <label for="example-search-input2" class="col-2">صورة غلاف  النشرة</label>
+                                                    <div class="col-10">
+
+                                                        <input required type="file" class="form-control" id="images" name="images" onchange="display(this);" />
+                                                        <img style="max-width:100%" id="img" >
+                                                    </div>
+
+                                                </div>
                                             <div class="col-12">
-                                                <div class="form-group row">
+                                        
+                                            <div class="form-group row">
                                                     <label for="example-search-input2" class="col-2">صور النشرة</label>
                                                     <div class="col-10">
 
@@ -118,7 +128,21 @@
 
         }
     </script>
-
+  <script>
+        function display(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+        
+                    reader.onload = function (e) {
+                        $('#img')
+                            .attr('src', e.target.result)
+                            
+                    };
+        
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
     <script>
         function pro1() {
             document.getElementById("file").click();

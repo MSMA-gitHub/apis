@@ -70,9 +70,7 @@ $countries_size = $stmt->rowcount();
                                                     <label for="example-search-input" class="col-2 col-form-label">المدينة او المدن</label>
                                                     <div class="col-10 cities">
                                                         <select multiple data-live-search="true" id="selectpicker" class="form-control selectpicker">
-                                                            <option>Mustard</option>
-                                                            <option>Ketchup</option>
-                                                            <option>Relish</option>
+                                                        <option value="668">Minsk</option><option value="669">Brest</option>
                                                         </select>
 
                                                     </div>
@@ -241,11 +239,8 @@ $countries_size = $stmt->rowcount();
                     city: document.getElementById('country').value
                 },
                 success: function(data) {
-                    $('#selectpicker option:selected').each(function(){
-                        $(this).prop('selected', false);
-                    });
-                    $('#selectpicker').multiselect('refresh');
-                    alert(data);
+                    console.log(data);
+                    $('.cities').html(data);
                 }
             });
         }
