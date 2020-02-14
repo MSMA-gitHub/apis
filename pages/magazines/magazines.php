@@ -1,3 +1,11 @@
+<?php
+require '../../api/db.php';
+$stmt = $conn->prepare("select magazine.id,title,end_date,count(photo)  from magazine inner join magazine_photo on magazine.id= magazine_photo.id  GROUP by magazine_photo.id order by end_date desc
+;");
+$stmt->execute();
+$magazine = $stmt->fetchAll();
+$m_size = $stmt->rowcount();
+?>
 <html lang="en">
 
 <head>
@@ -58,21 +66,33 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <?php
+for ($i = 0; $i < $m_size; $i++) {
+    $stmt = $conn->prepare("select name  from store where id in (select store from magazine_branch where id = ? ) ;");
+    $stmt->execute(array($magazine[$i][0]));
+    $store = $stmt->fetchAll();
+    ?>
                                                 <tr>
                                                     <td>
-                                                        محمد حسام الدين </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
+                                                       <?php echo $magazine[$i][1]; ?></td>
+                                                       <td><?php echo $store[0][0]; ?></td>
+                                                    <td> <?php echo $magazine[$i][3] + 1; ?></td>
+                                                    <td> <?php echo $magazine[$i][2]; ?> </td>
                                                     <td>
                                                         <div class="row">
-                                                            <a href="addMagazine.html"><label class="badge badge-gradient-info">صفحه النشرة</label></a>
-                                                            <button onclick="confirm(' سيتم مسح النشرة ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                        <form id="magazine<?php echo $magazine[$i][0]; ?>" action="../magazines/magazine.php" method="POST"> <input type="hidden" name="id" value="<?php echo $magazine[$i][0]; ?>">
+                                                       <a onclick="document.getElementById('magazine<?php echo $magazine[$i][0]; ?>').submit();"><label class="badge badge-gradient-info">صفحه النشره</label></a></form>
+                                                             <a style="width:30px"></a>
+                                                             <form id="deleteM<?php echo $magazine[$i][0]; ?>" action="../../api/magazine/delete_magazine.php" method="POST"> <input type="hidden" name="id" value="<?php echo $magazine[$i][0]; ?>">
+                                                       <button onclick="delete_magazine(<?php echo $magazine[$i][0]; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                 <i class="mdi mdi-close"></i>
-                                                              </button>
+                                                              </button></form>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <?php
+}?>
+                                                
                                             </tbody>
                                         </table>
                                     </div>
