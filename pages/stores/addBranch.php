@@ -244,6 +244,8 @@ $countries_size = $stmt->rowcount();
                     $('#selectpicker option:selected').each(function(){
                         $(this).prop('selected', false);
                     });
+                    $('#selectpicker').multiselect('refresh');
+                    alert(data);
                 }
             });
         }
