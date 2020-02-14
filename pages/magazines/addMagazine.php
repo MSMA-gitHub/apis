@@ -39,6 +39,16 @@
                                     <div class="card-body">
                                         <div class="form-group row">
                                             <div class="col-12">
+                                            <div class="form-group row">
+                                                    <label for="example-search-input2" class="col-2">صورة غلاف النشرة</label>
+                                                    <div class="col-10">
+
+                                                        <input required type="file" class="form-control" id="images0" name="images[]" onchange="preview_images0();" />
+                                                        <div class="row" id="image_preview0">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input2" class="col-2">صور النشرة</label>
                                                     <div class="col-10">
@@ -49,6 +59,7 @@
                                                     </div>
 
                                                 </div>
+                                                
                                                 <div class="form-group row">
                                                     <label for="example-search-input2" class="col-2">عنوان النشرة</label>
                                                     <div class="col-10">
@@ -107,6 +118,12 @@
     <!-- plugins:js -->
 
     <script>
+        function preview_images0() {
+            var total_file = document.getElementById("images0").files.length;
+            for (var i = 0; i < total_file; i++) {
+                $('#image_preview0').append("<div onclick='' class=''><img  class='img-responsive' src='" + URL.createObjectURL(event.target.files[i]) + "'></div>");
+            }
+        }
         function preview_images() {
             var total_file = document.getElementById("images").files.length;
             for (var i = 0; i < total_file; i++) {
