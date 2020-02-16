@@ -244,44 +244,41 @@ $countries_size = $stmt->rowcount();
 
     <script>
         $(document).ready(function() {
-            console.log("sdsd"); {
-                var PED = [{
-                    "value": "566",
-                    "text": "Eisenstadt"
-                }, {
-                    "value": "567",
-                    "text": "Innsbruck"
-                }, {
-                    "value": "568",
-                    "text": "Bregenz"
-                }, {
-                    "value": "569",
-                    "text": "Salzburg"
-                }, {
-                    "value": "570",
-                    "text": "Linz"
-                }, {
-                    "value": "571",
-                    "text": "Wiener Neustadt"
-                }, {
-                    "value": "572",
-                    "text": "Sankt P\u00f6lten"
-                }, {
-                    "value": "573",
-                    "text": "Graz"
-                }, {
-                    "value": "574",
-                    "text": "Klagenfurt"
-                }, {
-                    "value": "575",
-                    "text": "Vienna"
-                }];
-            }
-            var x = JSON.parse(PED);
-            console.log(x);
-            console.log("ss");
+            console.log("sdsd");
+            var PED = [{
+                "value": "566",
+                "text": "Eisenstadt"
+            }, {
+                "value": "567",
+                "text": "Innsbruck"
+            }, {
+                "value": "568",
+                "text": "Bregenz"
+            }, {
+                "value": "569",
+                "text": "Salzburg"
+            }, {
+                "value": "570",
+                "text": "Linz"
+            }, {
+                "value": "571",
+                "text": "Wiener Neustadt"
+            }, {
+                "value": "572",
+                "text": "Sankt P\u00f6lten"
+            }, {
+                "value": "573",
+                "text": "Graz"
+            }, {
+                "value": "574",
+                "text": "Klagenfurt"
+            }, {
+                "value": "575",
+                "text": "Vienna"
+            }]
+
             for (i = 0; i < PED.length; i++) {
-                $('#selectBox').append(new Option(PED["value"][i], PED["text"][i]));
+                $('#selectBox').append(new Option(PED[i].text, PED[i].value));
             }
         });
     </script>
