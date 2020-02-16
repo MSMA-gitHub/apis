@@ -57,7 +57,7 @@ $countries_size = $stmt->rowcount();
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">الدولة</label>
-                                                    <div class="col-10"><select name="country" id="country" class="form-control" onchange="a()">
+                                                    <div class="col-10"><select name="country" id="country" class="form-control" onclick="dummy()" onchange="a()">
                                                             <?php
                                                             for ($i = 0; $i < $countries_size; $i++) {
                                                                 echo '<option value="' . $countries[$i][0] . '">' . $countries[$i][1] . '</option>';
@@ -69,8 +69,8 @@ $countries_size = $stmt->rowcount();
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">المدينة او المدن</label>
                                                     <div class="col-10 cities">
-                                                        <select multiple data-live-search="true" id="selectpicker" class="form-control selectpicker">
-                                                        <option value="668">Minsk</option><option value="669">Brest</option>
+                                                        <select multiple data-live-search="true" id="selectBox" name='students[]' id='form_widget_students' data-value='' class="selectBox form-control selectpicker">
+
                                                         </select>
 
                                                     </div>
@@ -213,22 +213,12 @@ $countries_size = $stmt->rowcount();
     <!-- container-scroller -->
     <!-- plugins:js -->
 
-    <script src="../../assets/js/jquery.geocomplete.js"></script>
+
     <script>
         function pro1() {
             document.getElementById("file").click();
         }
     </script>
-<script>
-    $(document).ready(function(){
-        $('#selectpicker').multiselect({
-            nonSelectedText:'برجاء الاختيار',
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering:true,
-            buttonWidth:'400px'
-        });
-    });
-</script>
     <script>
         function a(x) {
             $('.cities').html('');
@@ -239,8 +229,11 @@ $countries_size = $stmt->rowcount();
                     city: document.getElementById('country').value
                 },
                 success: function(data) {
-                    console.log(data);
-                    $('.cities').html(data);
+                    $('#selectpicker option:selected').each(function() {
+                        $(this).prop('selected', false);
+                    });
+                    $('#selectpicker').multiselect('refresh');
+                    alert(data);
                 }
             });
         }
@@ -248,6 +241,50 @@ $countries_size = $stmt->rowcount();
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            console.log("sdsd"); {
+                var PED = [{
+                    "value": "566",
+                    "text": "Eisenstadt"
+                }, {
+                    "value": "567",
+                    "text": "Innsbruck"
+                }, {
+                    "value": "568",
+                    "text": "Bregenz"
+                }, {
+                    "value": "569",
+                    "text": "Salzburg"
+                }, {
+                    "value": "570",
+                    "text": "Linz"
+                }, {
+                    "value": "571",
+                    "text": "Wiener Neustadt"
+                }, {
+                    "value": "572",
+                    "text": "Sankt P\u00f6lten"
+                }, {
+                    "value": "573",
+                    "text": "Graz"
+                }, {
+                    "value": "574",
+                    "text": "Klagenfurt"
+                }, {
+                    "value": "575",
+                    "text": "Vienna"
+                }];
+            }
+            var x = JSON.parse(PED);
+            console.log(x);
+            console.log("ss");
+            for (i = 0; i < PED.length; i++) {
+                $('#selectBox').append(new Option(PED["value"][i], PED["text"][i]));
+            }
+        });
+    </script>
 
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>

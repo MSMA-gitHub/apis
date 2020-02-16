@@ -20,7 +20,7 @@
 <body class="">
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
-        <?php include'../../api/nav.php';?>
+        <?php include '../../api/nav.php';?>
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <div class="main-panel">
@@ -38,18 +38,22 @@
                                 <form action="">
                                     <div class="card-body">
                                         <div class="form-group row">
-                                        <div class="form-group row">
-                                                    <label for="example-search-input2" class="col-2">صورة غلاف  النشرة</label>
+                                       
+                                            <div class="col-12">
+
+
+                                            <div class="form-group row">
+                                                    <label for="example-search-input2" class="col-2">صورة غلاف النشرة</label>
                                                     <div class="col-10">
 
-                                                        <input required type="file" class="form-control" id="images" name="images" onchange="display(this);" />
-                                                        <img style="max-width:100%" id="img" >
+                                                        <input required type="file" class="form-control" id="images0" name="images[]" onchange="preview_images0();" />
+                                                        <div class="row" id="image_preview0">
+                                                        </div>
                                                     </div>
 
                                                 </div>
-                                            <div class="col-12">
-                                        
-                                            <div class="form-group row">
+                                                <div class="form-group row">
+
                                                     <label for="example-search-input2" class="col-2">صور النشرة</label>
                                                     <div class="col-10">
 
@@ -59,6 +63,7 @@
                                                     </div>
 
                                                 </div>
+
                                                 <div class="form-group row">
                                                     <label for="example-search-input2" class="col-2">عنوان النشرة</label>
                                                     <div class="col-10">
@@ -76,7 +81,7 @@
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">الفروع</label>
                                                     <div class="col-10"><select class="selectpicker form-control" multiple name="sms">
-                                                        
+
                                                         <option>ذكر</option>
                                                         <option>خنثي</option>
                                                       </select>
@@ -105,7 +110,7 @@
                 </div>
             </div>
             <!-- partial:partials/_sidebar.html -->
-            <?php include'../../api/side-nav.php';?>
+            <?php include '../../api/side-nav.php';?>
             <!-- partial -->
 
             <!-- main-panel ends -->
@@ -117,6 +122,12 @@
     <!-- plugins:js -->
 
     <script>
+        function preview_images0() {
+            var total_file = document.getElementById("images0").files.length;
+            for (var i = 0; i < total_file; i++) {
+                $('#image_preview0').append("<div onclick='' class=''><img  class='img-responsive' src='" + URL.createObjectURL(event.target.files[i]) + "'></div>");
+            }
+        }
         function preview_images() {
             var total_file = document.getElementById("images").files.length;
             for (var i = 0; i < total_file; i++) {
@@ -128,21 +139,7 @@
 
         }
     </script>
-  <script>
-        function display(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-        
-                    reader.onload = function (e) {
-                        $('#img')
-                            .attr('src', e.target.result)
-                            
-                    };
-        
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-        </script>
+  
     <script>
         function pro1() {
             document.getElementById("file").click();
