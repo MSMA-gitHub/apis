@@ -57,7 +57,8 @@ $countries_size = $stmt->rowcount();
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">الدولة</label>
-                                                    <div class="col-10"><select name="country" id="country" class="form-control"  onchange="a()">
+                                                    <div class="col-10"><select name="country" id="country" class="form-control" onchange="a()">
+                                                    <option value="">برجاء الاختيار</option>
                                                             <?php
                                                             for ($i = 0; $i < $countries_size; $i++) {
                                                                 echo '<option value="' . $countries[$i][0] . '">' . $countries[$i][1] . '</option>';
@@ -69,10 +70,7 @@ $countries_size = $stmt->rowcount();
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">المدينة او المدن</label>
                                                     <div class="col-10 cities">
-                                                        <select multiple data-live-search="true" id="selectBox" name='students[]' id='form_widget_students' data-value='' class="selectBox form-control selectpicker">
-
-                                                        </select>
-
+                                                        <select onchange="getSelected()" class="multi-select" multiple="multiple" id="selectBox"></select>
                                                     </div>
                                                 </div>
 
@@ -219,32 +217,15 @@ $countries_size = $stmt->rowcount();
             document.getElementById("file").click();
         }
     </script>
-    <script>
-        function a() {
-            $('#selectBox').html('');
-            $.ajax({
-                url: "../../api/store/citiesbycountry.php",
-                method: "POST",
-                data: {
-                    city: document.getElementById('country').value
-                },
-                success: function(data) {
-                   
-                    console.log(data);
-                    var PED = JSON.parse(data);
-                    for (i = 0; i < PED.length; i++) {
-                $('#selectBox').append(new Option(PED[i].text, PED[i].value));
-            }
-                }
-            });
-        }
-    </script>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
 
     <script>
         $(document).ready(function() {
+            const selectMembers = $("#selectBox");
+            selectMembers.empty();
             console.log("sdsd");
             var PED = [{
                 "value": "566",
@@ -278,12 +259,17 @@ $countries_size = $stmt->rowcount();
                 "text": "Vienna"
             }]
 
-            
+            // for (i = 0; i < PED.length; i++) {
+            //     $('#selectBox').append(new Option(PED[i].text, PED[i].value));
+            // }
+
+
         });
     </script>
 
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+    <script src="../../assets/js/bootstrap-multiselect.min.js"></script>
 
     <!-- endinject -->
     <!-- Plugin js for this page -->
@@ -298,7 +284,37 @@ $countries_size = $stmt->rowcount();
     <script src="../../assets/js/todolist.js"></script>
     <script src="../../assets/js/file-upload.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+
     <script src="../../assets/js/bootstrap-select.min.js"></script>
+
+    <script>
+        function a() {
+            $('#country').attr('disabled', true);
+            const selectMembers = $("#selectBox");
+            selectMembers.empty();
+            $.ajax({
+                url: "../../api/store/citiesbycountry.php",
+                method: "POST",
+                data: {
+                    city: document.getElementById('country').value
+                },
+                success: function(data) {
+
+                    var PED = JSON.parse(data);
+                    for (i = 0; i < PED.length; i++) {
+                        selectMembers.append(new Option(PED[i].text, PED[i].value));
+                    }
+                    selectMembers.multiselect('refresh');
+                }
+            });
+        }
+
+        function getSelected() {
+                console.log($('#selectBox').val());
+
+        }
+    </script>
+
     <!-- End custom js for this page -->
 </body>
 
