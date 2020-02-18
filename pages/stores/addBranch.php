@@ -57,7 +57,7 @@ $countries_size = $stmt->rowcount();
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">الدولة</label>
-                                                    <div class="col-10"><select name="country" id="country" class="form-control" onclick="dummy()" onchange="a()">
+                                                    <div class="col-10"><select name="country" id="country" class="form-control"  onchange="a()">
                                                             <?php
                                                             for ($i = 0; $i < $countries_size; $i++) {
                                                                 echo '<option value="' . $countries[$i][0] . '">' . $countries[$i][1] . '</option>';
@@ -220,8 +220,8 @@ $countries_size = $stmt->rowcount();
         }
     </script>
     <script>
-        function a(x) {
-            $('.cities').html('');
+        function a() {
+            $('#selectBox').html('');
             $.ajax({
                 url: "../../api/store/citiesbycountry.php",
                 method: "POST",
@@ -229,11 +229,12 @@ $countries_size = $stmt->rowcount();
                     city: document.getElementById('country').value
                 },
                 success: function(data) {
-                    $('#selectpicker option:selected').each(function() {
-                        $(this).prop('selected', false);
-                    });
-                    $('#selectpicker').multiselect('refresh');
-                    alert(data);
+                   
+                    console.log(data);
+                    var PED = JSON.parse(data);
+                    for (i = 0; i < PED.length; i++) {
+                $('#selectBox').append(new Option(PED[i].text, PED[i].value));
+            }
                 }
             });
         }
@@ -277,9 +278,7 @@ $countries_size = $stmt->rowcount();
                 "text": "Vienna"
             }]
 
-            for (i = 0; i < PED.length; i++) {
-                $('#selectBox').append(new Option(PED[i].text, PED[i].value));
-            }
+            
         });
     </script>
 
