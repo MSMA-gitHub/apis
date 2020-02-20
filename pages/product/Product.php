@@ -1,5 +1,7 @@
 <?php
 require '../../api/db.php';
+if(!isset($_POST['id']))
+    header("location:products.php");
 $stmt=$conn->prepare("select id,name,price,brand,image,details,product_branch.store  from product inner join product_branch on product.id =product_branch.product where id=?;");
 $stmt->execute(array($_POST['id']));
 $result=$stmt->fetchAll();
