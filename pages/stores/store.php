@@ -215,7 +215,7 @@ if (empty($branch[$i][$o]) || empty($branch[$i][$c])) {
     ?> </td>
                                                     <td>
                                                         <div class="row">
-                                                        <form id="branch<?php echo $branch[$i][0]; ?>" action="branch.php" method="POST"> <input type="hidden" name="id" value="<?php echo $_POST['id']; ?>"> <input type="hidden" name="id" value="<?php echo $branch[$i][0]; ?>">
+                                                        <form id="branch<?php echo $branch[$i][0]; ?>" action="branch.php" method="POST"> <input type="hidden" name="id" value="<?php echo $branch[$i][0]; ?>"> <input type="hidden" name="id" value="<?php echo $branch[$i][0]; ?>">
                                                        <a onclick="document.getElementById('branch<?php echo $branch[$i][0]; ?>').submit();"><label class="badge badge-gradient-info">صفحه الفرع</label></a></form>
                                                              <a style="width:30px"></a>
                                                              <form id="deleteB<?php echo $branch[$i][0]; ?>" action="../../api/store/delete_branch.php" method="POST"> <input type="hidden" name="id" value="<?php echo $branch[$i][0]; ?>">
