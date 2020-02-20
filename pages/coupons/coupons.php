@@ -1,3 +1,10 @@
+<?php
+require '../../api/db.php';
+$stmt = $conn->prepare("select code.id,code.code,type,data,title,photo,end_date,store_id  from code inner join store_code on code.id=store_code.code  where  type = 0 or type = 1 group by code.id;");
+$stmt->execute();
+$code = $stmt->fetchAll();
+$c_size = $stmt->rowcount();
+?>
 <html lang="en">
 
 <head>
@@ -38,7 +45,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="addCoupon.html"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة كوبون </button></a>
+                                            <a href="addCoupon.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة كوبون </button></a>
                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول الأكواد</h4>
@@ -52,6 +59,7 @@
                                                 <tr>
                                                     <th> الكوبون </th>
                                                     <th> المتجر </th>
+                                                    <th>صورة الكوبون </th>
                                                     <th> نوع الكوبون </th>
                                                     <th> الكود </th>
                                                     <th> تاريخ الانتهاء </th>
@@ -59,22 +67,42 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <?php 
+                                                for($i=0;$i<$c_size;$i++)
+                                                {
+                                                    $stmt = $conn->prepare("select name  from  store where id= ?;");
+                                                    $stmt->execute(array($code[$i]['store_id']));
+                                                    $store = $stmt->fetchAll();
+                                                     ?>
                                                 <tr>
-                                                    <td>
-                                                        <img src="../../assets//images/faces/face1.jpg" class="mr-2" alt="image"> محمد حسام الدين </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
+                                                    <td><?php echo $code[$i]['title'];?>
+                                                        </td>
+                                                        <td><?php echo $store[0][0];?>
+                                                        </td>
+                                                        <td>
+                                                        <img src="../../api/<?php echo $code[$i]['photo'];?>" class="mb-2 mh-50 rounded" alt="image">  </td>
+                                                    <td> <?php if($code[$i]['type']==0)
+                                                    echo 'خصم مبلغ';
+                                                    elseif($code[$i]['type']==1)
+                                                    echo'خصم نسبة ';
+                                                    ?> </td>
+                                                    <td> <?php echo $code[$i]['code'];?> </td>
+                                                    <td> <?php echo $code[$i]['end_date'];?> </td>
                                                     <td>
                                                         <div class="row">
-                                                            <a href="addCoupon.html"><label class="badge badge-gradient-info">صفحه الكوبون</label></a>
-                                                            <button onclick="confirm(' سيتم مسح الاعلان ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                        <form id="code<?php echo $code[$i][0]; ?>" action="../coupons/coupon.php" method="POST"> <input type="hidden" name="id" value="<?php echo $code[$i][0]; ?>">
+                                                       <a onclick="document.getElementById('code<?php echo $code[$i][0]; ?>').submit();"><label class="badge badge-gradient-info">صفحه الكود</label></a></form>
+                                                             <a style="width:30px"></a>
+                                                             <form id="deleteC<?php echo $code[$i]['id']; ?>" action="../../api/code/deletecode.php?i=0" method="POST"> <input type="hidden" name="id" value="<?php echo $code[$i]['id']; ?>">
+                                                       <button onclick="delete_code(<?php echo $code[$i]['id']; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                 <i class="mdi mdi-close"></i>
-                                                              </button>
+                                                              </button></form>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <?php
+                                                }
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -122,6 +150,14 @@
             $('#tableId').DataTable();
         });
     </script>
+      <script>
+        function delete_code(x)
+        {
+            var v ='deleteC'+x;
+            if(confirm(' سيتم مسح البيانات ! '))
+            document.getElementById(v).submit();
+        }
+        </script>
 </body>
 
 </html>

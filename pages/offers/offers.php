@@ -1,3 +1,10 @@
+<?php
+require '../../api/db.php';
+$stmt = $conn->prepare("select code.id,code.code,type,data,title,photo,end_date,store_id  from code inner join store_code on code.id=store_code.code  where  type = 2 or type = 3 or type =4 group  by code.id;");
+$stmt->execute();
+$offers = $stmt->fetchAll();
+$c_size = $stmt->rowcount();
+?>
 <html lang="en">
 
 <head>
@@ -38,7 +45,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="addOffer.html"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة عرض </button></a>
+                                            <a href="addOffer.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة عرض </button></a>
                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول العروض</h4>
@@ -52,27 +59,49 @@
                                                 <tr>
                                                     <th> العرض </th>
                                                     <th> المتجر </th>
+                                                    <th>صورة العرض </th>
                                                     <th> نوع العرض </th>
                                                     <th> تاريخ الانتهاء </th>
                                                     <th> خيارات </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <?php 
+                                                for($i=0;$i<$c_size;$i++)
+                                                {
+                                                    $stmt = $conn->prepare("select name  from  store where id= ?;");
+                                                    $stmt->execute(array($offers[$i]['store_id']));
+                                                    $store = $stmt->fetchAll();
+                                                     ?>
                                                 <tr>
-                                                    <td>
-                                                        <img src="../../assets//images/faces/face1.jpg" class="mr-2" alt="image"> محمد حسام الدين </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
-                                                    <td> 01003989594 </td>
+                                                    <td><?php echo $offers[$i]['title'];?>
+                                                        </td>
+                                                        <td><?php echo $store[0][0];?>
+                                                        </td>
+                                                <td>
+                                                        <img src="../../api/<?php echo $offers[$i]['photo'];?>" class="mb-2 mh-50 rounded" alt="image">  </td>
+                                                    <td> <?php if($offers[$i]['type']==2)
+                                                    echo 'هدية مجانية';
+                                                    elseif($offers[$i]['type']==3)
+                                                    echo'شحن مجاني ';
+                                                    else
+                                                    echo 'أخري'; ?>
+                                                     </td>
+                                                    <td><?php echo $offers[$i]['end_date'];?></td>
                                                     <td>
                                                         <div class="row">
-                                                            <a href="addOffer.html"><label class="badge badge-gradient-info">صفحه العرض</label></a>
-                                                            <button onclick="confirm(' سيتم مسح الاعلان ! ');" type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                        <form id="offers<?php echo $offers[$i]['id']; ?>" action="../offers/offer.php" method="POST"> <input type="hidden" name="id" value="<?php echo $offers[$i]['id']; ?>">
+                                                       <a onclick="document.getElementById('offers<?php echo $offers[$i]['id']; ?>').submit();"><label class="badge badge-gradient-info">صفحه العرض</label></a></form>
+                                                             <a style="width:30px"></a>
+                                                             <form id="deleteC<?php echo $offers[$i]['id']; ?>" action="../../api/code/deletecode.php?i=1" method="POST"> <input type="hidden" name="id" value="<?php echo $offers[$i]['id']; ?>">
+                                                       <button onclick="delete_code(<?php echo $offers[$i]['id']; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                 <i class="mdi mdi-close"></i>
-                                                              </button>
+                                                              </button></form>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <?php
+                                                } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -119,6 +148,14 @@
         $(document).ready(function() {
             $('#tableId').DataTable();
         });
+    </script>
+    <script>
+        function delete_code(x)
+        {
+            var v ='deleteC'+x;
+            if(confirm(' سيتم مسح البيانات ! '))
+                document.getElementById(v).submit();
+        }
     </script>
 </body>
 

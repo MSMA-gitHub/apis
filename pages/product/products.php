@@ -84,7 +84,7 @@ $size=$stmt->rowcount();
                                                     <td>
                                                     <div class="row">
                                                         <form id="product<?php echo$result[$i]['id']; ?>" action="product.php" method="POST"> <input type="hidden" name="id" value="<?php echo$result[$i]['id']; ?>">
-                                                       <a onclick="document.getElementById('product<?php echo$result[$i]['id']; ?>').submit();"><label class="badge badge-gradient-info">صفحه الاعلان</label></a></form>
+                                                       <a onclick="document.getElementById('product<?php echo$result[$i]['id']; ?>').submit();"><label class="badge badge-gradient-info">صفحه المنتج</label></a></form>
                                                              <a style="width:30px"></a>
                                                              <form id="delete<?php echo$result[$i]['id']; ?>" action="../../api/product/deleteproduct.php" method="POST"> <input type="hidden" name="id" value="<?php echo$result[$i]['id']; ?>">
                                                        <button onclick="delete_product(<?php echo$result[$i]['id']; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">

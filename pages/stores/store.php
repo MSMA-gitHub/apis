@@ -102,7 +102,10 @@ $m_size = $stmt->rowcount();
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="addBranch.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة فرع </button></a>
+                                        <form id="store<?php echo$_POST['id']; ?>" action="addBranch.php" method="POST"> <input type="hidden" name="id" value="<?php echo $_POST['id']; ?>">
+                                                       <a onclick="document.getElementById('store<?php echo$_POST['id']; ?>').submit();"><button type="submit" class="btn btn-outline-info btn-icon-text"> إضافة فرع </button></a></form>
+                                                            
+                                            
                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول الفروع</h4>
@@ -212,7 +215,7 @@ if (empty($branch[$i][$o]) || empty($branch[$i][$c])) {
     ?> </td>
                                                     <td>
                                                         <div class="row">
-                                                        <form id="branch<?php echo $branch[$i][0]; ?>" action="branch.php" method="POST"> <input type="hidden" name="id" value="<?php echo $branch[$i][0]; ?>">
+                                                        <form id="branch<?php echo $branch[$i][0]; ?>" action="branch.php" method="POST"> <input type="hidden" name="id" value="<?php echo $_POST['id']; ?>"> <input type="hidden" name="id" value="<?php echo $branch[$i][0]; ?>">
                                                        <a onclick="document.getElementById('branch<?php echo $branch[$i][0]; ?>').submit();"><label class="badge badge-gradient-info">صفحه الفرع</label></a></form>
                                                              <a style="width:30px"></a>
                                                              <form id="deleteB<?php echo $branch[$i][0]; ?>" action="../../api/store/delete_branch.php" method="POST"> <input type="hidden" name="id" value="<?php echo $branch[$i][0]; ?>">
@@ -236,8 +239,9 @@ if (empty($branch[$i][$o]) || empty($branch[$i][$c])) {
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="../magazines/addMagazine.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة نشرة </button></a>
-                                        </div>
+                                        <form id="mag<?php echo$_POST['id']; ?>" action="../magazines/addMagazine.php" method="POST"> <input type="hidden" name="id" value="<?php echo $_POST['id']; ?>">
+                                                       <a onclick="document.getElementById('mag<?php echo$_POST['id']; ?>').submit();"><button type="submit" class="btn btn-outline-info btn-icon-text">  إضافة نشرة </button></a></form>
+                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول النشرات</h4>
                                         </div>
@@ -290,7 +294,8 @@ for ($i = 0; $i < $m_size; $i++) {
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="../coupons/addCoupon.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة كوبون </button></a>
+                                        <form id="cou<?php echo$_POST['id']; ?>" action="../coupons/addCoupon.php" method="POST"> <input type="hidden" name="id" value="<?php echo $_POST['id']; ?>">
+                                                       <a onclick="document.getElementById('cou<?php echo$_POST['id']; ?>').submit();"><button type="submit" class="btn btn-outline-info btn-icon-text"> إضافة كوبون  </button></a></form>
                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول الأكواد</h4>
@@ -353,7 +358,8 @@ for ($i = 0; $i < $m_size; $i++) {
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="../offers/addOffer.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة عرض </button></a>
+                                        <form id="off<?php echo$_POST['id']; ?>" action="../offers/addOffer.php" method="POST"> <input type="hidden" name="id" value="<?php echo $_POST['id']; ?>">
+                                                       <a onclick="document.getElementById('off<?php echo$_POST['id']; ?>').submit();"><button type="submit" class="btn btn-outline-info btn-icon-text">إضافة عرض</button></a></form>
                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول العروض</h4>

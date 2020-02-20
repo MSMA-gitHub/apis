@@ -1,6 +1,6 @@
 <?php
 require '../../api/db.php';
-$stmt = $conn->prepare("select magazine.id,title,end_date,count(photo)  from magazine inner join magazine_photo on magazine.id= magazine_photo.id  GROUP by magazine_photo.id order by end_date desc
+$stmt = $conn->prepare("select magazine.id,title,end_date,count(photo)  from magazine inner join magazine_photo on magazine.id= magazine_photo.id  GROUP by magazine.id order by end_date desc
 ;");
 $stmt->execute();
 $magazine = $stmt->fetchAll();
@@ -46,7 +46,7 @@ $m_size = $stmt->rowcount();
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="addMagazine.html"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة نشرة </button></a>
+                                            <a href="addMagazine.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة نشرة </button></a>
                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول النشرات</h4>
@@ -83,7 +83,7 @@ for ($i = 0; $i < $m_size; $i++) {
                                                         <form id="magazine<?php echo $magazine[$i][0]; ?>" action="../magazines/magazine.php" method="POST"> <input type="hidden" name="id" value="<?php echo $magazine[$i][0]; ?>">
                                                        <a onclick="document.getElementById('magazine<?php echo $magazine[$i][0]; ?>').submit();"><label class="badge badge-gradient-info">صفحه النشره</label></a></form>
                                                              <a style="width:30px"></a>
-                                                             <form id="deleteM<?php echo $magazine[$i][0]; ?>" action="../../api/magazine/delete_magazine.php" method="POST"> <input type="hidden" name="id" value="<?php echo $magazine[$i][0]; ?>">
+                                                             <form id="deleteM<?php echo $magazine[$i][0]; ?>" action="../../api/magazine/deletemegazine.php" method="POST"> <input type="hidden" name="id" value="<?php echo $magazine[$i][0]; ?>">
                                                        <button onclick="delete_magazine(<?php echo $magazine[$i][0]; ?>);"  type="button" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                 <i class="mdi mdi-close"></i>
                                                               </button></form>
@@ -139,6 +139,14 @@ for ($i = 0; $i < $m_size; $i++) {
         $(document).ready(function() {
             $('#tableId').DataTable();
         });
+    </script>
+    <script>
+        function delete_magazine(x)
+        {
+            var v ='deleteM'+x;
+            if(confirm(' سيتم مسح النشرة ! '))
+                document.getElementById(v).submit();
+        }
     </script>
 </body>
 
