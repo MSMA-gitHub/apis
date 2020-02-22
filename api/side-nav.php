@@ -15,10 +15,11 @@ echo'<nav class="sidebar sidebar-offcanvas" id="sidebar">
                             </div>
                         </a>
                     </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="../home.php">
-                            <span class="menu-title">الرئيسية</span>
-                            <i class="mdi mdi-home menu-icon"></i>
+                        <a class="nav-link" href="../basicData/basicData.php">
+                            <span class="menu-title">إدارة الدول والمدن</span>
+                            <i class="mdi mdi-city menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
