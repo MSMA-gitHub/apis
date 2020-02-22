@@ -47,7 +47,7 @@ $result=$stmt->fetchAll();
                                 <div class="card-body">
                                     <div class="row">
                                         <div style="text-align: -webkit-left;margin-bottom: 10;" class="col-sm-5">
-                                            <a href="addSubCategory.html"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة فئة جانبية </button></a>
+                                            <a href="addSubCategory.php"><button type="button" class="btn btn-outline-info btn-icon-text"> إضافة فئة جانبية </button></a>
                                         </div>
                                         <div class="col-sm-7">
                                             <h4 class="card-title">جدول الفئات</h4>

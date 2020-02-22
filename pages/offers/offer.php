@@ -106,10 +106,9 @@ $branch_size = $stmt->rowcount();
                                                     <div class="col-10">
                                                         <?php
                                                         for ($i = 0; $i < $branch_size; $i++) {
-                                                            echo '<div  id="branch' . $branch[$i]['0'] . '">  
-                                                      
-                                                       <label>' . $branch[$i][1] . '</label>
-                                                             <a onclick="delete_branch(' . $branch[$i]['0'] . ');"><label>x</label></a></div>';
+                                                            echo '<button class="btn btn-dark btn-rounded btn-sm"
+                                                            onclick="delete_branch(' . $branch[$i]['0'] . ');">
+                                                            ' . $branch[$i][1] . '<i class="mdi mdi-close-circle-outline"></i></button>';
                                                         }
                                                         ?>
                                                     </div>

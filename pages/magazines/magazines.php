@@ -74,6 +74,7 @@ for ($i = 0; $i < $m_size; $i++) {
     ?>
                                                 <tr>
                                                     <td>
+                                                    <img src="../../api/<?php echo $magazine[$i]['photo'];?>" class="mb-2 mh-50 rounded" alt="image">
                                                        <?php echo $magazine[$i][1]; ?></td>
                                                        <td><?php echo $store[0][0]; ?></td>
                                                     <td> <?php echo $magazine[$i][3] + 1; ?></td>

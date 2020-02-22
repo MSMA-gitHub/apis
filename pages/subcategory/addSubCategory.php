@@ -36,6 +36,7 @@
                             <div class="card">
                             <form action="../../api/sub/add.php" enctype="multipart/form-data" method="post">
                              <div class="card-body">
+                                 <div>
                                         <div class="form-group row">
                                             <div class="col-2">
                                             <div onclick="pro1()" class="nav-profile-image">
@@ -74,9 +75,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <a > <button type="submit" style="float:left" class="btn btn-outline-primary btn-round">اضافة</button></a>
                                         </div>
-                                        <a > <button type="submit" style="float:left" class="btn btn-outline-primary btn-round">اضافة</button></a>
+                                        
                                 </form>
                                 </div>
                             </div>

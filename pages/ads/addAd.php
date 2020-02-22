@@ -99,7 +99,7 @@ $result=$stmt->fetchAll();
                                             </div>
 
                                         </div>
-                                        <a > <button type="submit"  class="btn btn-outline-primary btn-round">اضافة</button></a>
+                                        <a > <button type="submit" style="float:left" class="btn btn-outline-primary btn-round">اضافة</button></a>
                                 </form>
                                 </div>
                             </div>

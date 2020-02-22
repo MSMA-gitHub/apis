@@ -77,6 +77,21 @@ $stores_size = $stmt->rowcount();
                                                         <input type="text" name="title" class="form-control" value="" id="" required>
                                                     </div>
                                                 </div>
+                                                
+                                                <div class="form-group row">
+                                                    <label for="example-search-input" class="col-2 col-form-label">نوع النشرة</label>
+                                                    <div class="col-10">
+                                                        <select class="form-control" id="store" onchange="a()">
+                                                            <option value="">اختر</option>
+                                                            <?php
+                                                            for ($i = 0; $i < $stores_size; $i++) {
+                                                                // echo '<option value="' . $stores[$i][0] . '">' . $stores[$i][1] . '</option>';
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                    <input type="hidden" name="store1" id="store1"/>
+                                                </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">المتجر</label>
                                                     <div class="col-10">

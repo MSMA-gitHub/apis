@@ -52,7 +52,7 @@ echo'<nav class="sidebar sidebar-offcanvas" id="sidebar">
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../product/product.php">
+                        <a class="nav-link" href="../product/products.php">
                             <span class="menu-title">إدارة المنتجات</span>
                             <i class="mdi mdi-cart-outline menu-icon"></i>
                         </a>

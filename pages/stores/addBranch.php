@@ -60,6 +60,7 @@ $countries_size = $stmt->rowcount();
                                             <div class="form-group row">
                                                 <label for="example-search-input" class="col-2 col-form-label">الدولة</label>
                                                 <div class="col-10"><select name="country" id="country" class="form-control" onchange="a()">
+                                                <option value="null">اختر الدولة</option>
                                                         <?php
                                                         for($i=0;$i<$countries_size;$i++)
                                                         {
@@ -202,7 +203,7 @@ $countries_size = $stmt->rowcount();
 
                                     </div>
                                     <a>
-                                        <button type="submit" class="btn btn-outline-primary btn-round">اضافة</button>
+                                        <button type="submit" style="float: left" class="btn btn-outline-primary btn-round">اضافة</button>
                                     </a>
                             </form>
                             </form>
