@@ -36,7 +36,7 @@
                     <div class="row">
                         <div class="rtl col-12 grid-margin">
                             <div class="card">
-                            <form action="../../api/store/add.php" enctype="multipart/form-data" method="post">
+
                                 <div class="card-body">
                                         <div class="form-group row">
                                             <div class="col-2">

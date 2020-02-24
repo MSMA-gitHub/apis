@@ -1,25 +1,42 @@
 <?php
 
 require '../../api/db.php';
-if (isset($_POST['add'])) {
-    $stmt = $conn->prepare("insert into  brand values (null,?);");
-    $stmt->execute(array($_POST['brand']));
-}
-if (isset($_POST['delete'])) {
-
-    try {
-        $stmt = $conn->prepare("delete from  brand where id =?;");
-        $stmt->execute(array($_POST['id']));
-    } catch (PDOException $e) {
-        if (strpos($e->getmessage(), "Cannot delete or update a parent row: a foreign key constraint fails") !== false)
-            echo "<script> alert('لا يمكن مسح الماركة بدون تعديل المنتج المرتبط بها '); </script>";
-    }
-}
-$stmt = $conn->prepare("select *  from brand;");
+$stmt = $conn->prepare("select *  from country order by country;");
 $stmt->execute();
-$result = $stmt->fetchAll();
-$size = $stmt->rowcount();
+$countries_size = $stmt->rowcount();
 
+$stmt=$conn->prepare("select *  from city order by countrycode;");
+$stmt->execute();
+$size=$stmt->rowcount();
+if (isset($_POST['add_country'])) {
+    $stmt = $conn->prepare("insert into  country values (?,?,?);");
+    $stmt->execute(array($countries_size+61,$_POST['country'],$_POST['code']));
+}
+if (isset($_POST['add_city'])) {
+    $stmt = $conn->prepare("insert into  city values (?,?,?);");
+    $stmt->execute(array($size+239,$_POST['city'],$_POST['country_code']));
+}
+if (isset($_POST['delete_country'])) {
+
+        $stmt = $conn->prepare("delete from  country where id =?;");
+        $stmt->execute(array($_POST['id']));
+
+}
+if (isset($_POST['delete_city'])) {
+
+    $stmt = $conn->prepare("delete from  city where id =?;");
+    $stmt->execute(array($_POST['C_id']));
+
+}
+$stmt = $conn->prepare("select *  from country order by country ASC ;");
+$stmt->execute();
+$countries = $stmt->fetchAll();
+$countries_size = $stmt->rowcount();
+
+$stmt=$conn->prepare("select *  from city order by countrycode Asc ;");
+$stmt->execute();
+$result=$stmt->fetchAll();
+$size=$stmt->rowcount();
 ?>
 <html lang="en">
 
@@ -58,7 +75,7 @@ $size = $stmt->rowcount();
                     <div class="row">
                         <div class="rtl col-12 grid-margin">
                             <div class="card">
-                                <form action="brand.php" method="POST">
+                                <form action="basicData.php" method="POST">
                                     <div class="card-body">
 
                                         <div class="form-group row">
@@ -67,14 +84,19 @@ $size = $stmt->rowcount();
                                                 <div class="form-group row">
                                                     <label for="example-search-input2" class="col-2">اسم الدولة</label>
                                                     <div class="col-10">
-                                                        <input type="text" name="brand" class="form-control" value="" required>
+                                                        <input type="text" name="country" class="form-control" value="" required>
                                                     </div>
                                                 </div>
-
+                                                <div class="form-group row">
+                                                    <label for="example-search-input2" class="col-2">كود الدولة</label>
+                                                    <div class="col-10">
+                                                        <input type="number" name="code" class="form-control" value="" required>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                         </div>
-                                        <a> <button type="submit" name="add" style="float:left" class="btn btn-outline-primary btn-round">إضافة</button></a>
+                                        <a> <button type="submit" name="add_country" style="float:left" class="btn btn-outline-primary btn-round">إضافة</button></a>
                                     </div>
 
                                 </form>
@@ -82,7 +104,7 @@ $size = $stmt->rowcount();
                         </div>
                         <div class="rtl col-12 grid-margin">
                             <div class="card">
-                                <form action="brand.php" method="POST">
+                                <form action="basicData.php" method="POST">
                                     <div class="card-body">
 
                                         <div class="form-group row">
@@ -91,12 +113,12 @@ $size = $stmt->rowcount();
                                                 <div class="form-group row">
                                                     <label for="example-search-input2" class="col-2">اسم المدينة</label>
                                                     <div class="col-10">
-                                                        <input type="text" name="brand" class="form-control" value="" required>
+                                                        <input type="text" name="city" class="form-control" value="" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label"> الدولة التابعة لها</label>
-                                                    <div class="col-10"><select name="country" id="country" class="form-control">
+                                                    <div class="col-10"><select name="country_code" id="country" class="form-control">
                                                             <option value="null">اختر الدولة</option>
                                                             <?php
                                                             for ($i = 0; $i < $countries_size; $i++) {
@@ -110,7 +132,7 @@ $size = $stmt->rowcount();
                                             </div>
 
                                         </div>
-                                        <a> <button type="submit" name="add" style="float:left" class="btn btn-outline-primary btn-round">إضافة</button></a>
+                                        <a> <button type="submit" name="add_city" style="float:left" class="btn btn-outline-primary btn-round">إضافة</button></a>
                                     </div>
 
                                 </form>
@@ -131,20 +153,22 @@ $size = $stmt->rowcount();
                                             <thead>
                                                 <tr>
                                                     <th> الدولة </th>
+                                                    <th> كود الدولة </th>
                                                     <th> خيارات </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                for ($i = 0; $i < $size; $i++) {
+                                                for ($i = 0; $i < $countries_size; $i++) {
                                                 ?>
                                                     <tr>
 
-                                                        <td> <?php echo $result[$i][1]; ?> </td>
+                                                        <td> <?php echo $countries[$i][1]; ?> </td>
+                                                        <td> <?php echo $countries[$i][2]; ?> </td>
 
                                                         <td>
-                                                            <form id="delete<?php echo $result[$i]['0']; ?>" action="brand.php" method="POST"> <input type="hidden" name="id" value="<?php echo $result[$i]['0']; ?>">
-                                                                <button onclick="delete_add(<?php echo $result[$i]['0']; ?>);" name="delete" type="submit" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                            <form id="deletec<?php echo $countries[$i]['0']; ?>" action="basicData.php" method="POST"> <input type="hidden" name="id" value="<?php echo $countries[$i]['0']; ?>">
+                                                                <button onclick="delete_data(c<?php echo $countries[$i]['0']; ?>);" name="delete_country" type="submit" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                     <i class="mdi mdi-close"></i>
                                                                 </button></form>
                                                         </td>
@@ -180,14 +204,18 @@ $size = $stmt->rowcount();
                                             <tbody>
                                                 <?php
                                                 for ($i = 0; $i < $size; $i++) {
+
+                                                    $stmt = $conn->prepare("select country  from country where id= ?;");
+                                                    $stmt->execute(array( $result[$i][2]));
+                                                    $country = $stmt->fetchAll();
                                                 ?>
                                                     <tr>
 
                                                         <td> <?php echo $result[$i][1]; ?> </td>
-                                                        <td>ss</td>
+                                                        <td> <?php echo $country[0][0]; ?></td>
                                                         <td>
-                                                            <form id="delete<?php echo $result[$i]['0']; ?>" action="brand.php" method="POST"> <input type="hidden" name="id" value="<?php echo $result[$i]['0']; ?>">
-                                                                <button onclick="delete_add(<?php echo $result[$i]['0']; ?>);" name="delete" type="submit" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                            <form id="deleteci<?php echo $result[$i]['0']; ?>" action="basicData.php" method="POST"> <input type="hidden" name="C_id" value="<?php echo $result[$i]['0']; ?>">
+                                                                <button onclick="delete_data(ci<?php echo $result[$i]['0']; ?>);" name="delete_city" type="submit" style="width:50px;" class="btn btn-gradient-danger btn-rounded btn-icon">
                                                                     <i class="mdi mdi-close"></i>
                                                                 </button></form>
                                                         </td>
@@ -223,9 +251,9 @@ $size = $stmt->rowcount();
         }
     </script>
     <script>
-        function delete_add(x) {
+        function delete_data(x) {
             var v = 'delete' + x;
-            if (confirm(' سيتم مسح الماركة ! '))
+            if (confirm(' سيتم مسح البيانات ! '))
                 document.getElementById(v).submit();
         }
     </script>

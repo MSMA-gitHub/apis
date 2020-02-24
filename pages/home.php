@@ -1,3 +1,6 @@
+<?php
+header("location:basicData/basicData.php");
+?>
 <html lang="en">
 
 <head>

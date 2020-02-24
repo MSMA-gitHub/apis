@@ -113,84 +113,84 @@ $cities_size=$stmt->rowcount();
                                                 <label for="example-search-input2" class="col-2">السبت من :</label>
                                                 <div class="col-4">
                                                     <div class="col-10">
-                                                        <input type="time" value="<?php echo $result[0]['sat_o'] ?>" name="sat_o"   class="form-control" .>
+                                                        <input type="time" value="<?php echo $result[0]['sat-open'] ?>" name="sat_o"   class="form-control" .>
                                                     </div>
                                                 </div>
                                                 <label for="example-search-input2" class="col-2">السبت إلي :</label>
                                                 <div class="col-4">
-                                                    <input type="time" value="<?php echo $result[0]['sat_c'] ?>" name="sat_c" class="form-control" .>
+                                                    <input type="time" value="<?php echo $result[0]['sat-close'] ?>" name="sat_c" class="form-control" .>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="example-search-input2" class="col-2">الأحد من :</label>
                                                 <div class="col-4">
                                                     <div class="col-10">
-                                                        <input type="time" value="<?php echo $result[0]['sun_o'] ?>" name="sun_o" class="form-control" .>
+                                                        <input type="time" value="<?php echo $result[0]['sun-open'] ?>" name="sun_o" class="form-control" .>
                                                     </div>
                                                 </div>
                                                 <label for="example-search-input2" class="col-2">الأحد إلي :</label>
                                                 <div class="col-4">
-                                                    <input type="time" value="<?php echo $result[0]['sun_c'] ?>" name="sun_c" class="form-control" .>
+                                                    <input type="time" value="<?php echo $result[0]['sun-close'] ?>" name="sun_c" class="form-control" .>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="example-search-input2" class="col-2">الأثنين من :</label>
                                                 <div class="col-4">
                                                     <div class="col-10">
-                                                        <input type="time" value="<?php echo $result[0]['mon_o'] ?>" name="mon_o" class="form-control" .>
+                                                        <input type="time" value="<?php echo $result[0]['mon-open'] ?>" name="mon_o" class="form-control" .>
                                                     </div>
                                                 </div>
                                                 <label for="example-search-input2" class="col-2">الأثنين إلي :</label>
                                                 <div class="col-4">
-                                                    <input type="time" value="<?php echo $result[0]['mon_c'] ?>" name="mon_c" class="form-control" .>
+                                                    <input type="time" value="<?php echo $result[0]['mon-close'] ?>" name="mon_c" class="form-control" .>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="example-search-input2" class="col-2">الثلاثاء من :</label>
                                                 <div class="col-4">
                                                     <div class="col-10">
-                                                        <input type="time" value="<?php echo $result[0]['tue_o'] ?>" name="tue_o" class="form-control" .>
+                                                        <input type="time" value="<?php echo $result[0]['tues-open'] ?>" name="tue_o" class="form-control" .>
                                                     </div>
                                                 </div>
                                                 <label for="example-search-input2" class="col-2">الثلاثاء إلي :</label>
                                                 <div class="col-4">
-                                                    <input type="time" value="<?php echo $result[0]['tue_c'] ?>" name="tue_c" class="form-control" .>
+                                                    <input type="time" value="<?php echo $result[0]['tues-close'] ?>" name="tue_c" class="form-control" .>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="example-search-input2" class="col-2">الأربعاء من :</label>
                                                 <div class="col-4">
                                                     <div class="col-10">
-                                                        <input type="time" value="<?php echo $result[0]['wen_o'] ?>" name="wen_o" class="form-control" .>
+                                                        <input type="time" value="<?php echo $result[0]['wends-open'] ?>" name="wen_o" class="form-control" .>
                                                     </div>
                                                 </div>
                                                 <label for="example-search-input2" class="col-2">الأربعاء إلي :</label>
                                                 <div class="col-4">
-                                                    <input type="time" value="<?php echo $result[0]['wen_c'] ?>" name="wen_c" class="form-control" .>
+                                                    <input type="time" value="<?php echo $result[0]['wen-close'] ?>" name="wen_c" class="form-control" .>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="example-search-input2" class="col-2">الخميس من :</label>
                                                 <div class="col-4">
                                                     <div class="col-10">
-                                                        <input type="time" value="<?php echo $result[0]['thu_o'] ?>" name="thu_o" class="form-control" .>
+                                                        <input type="time" value="<?php echo $result[0]['thurs-open'] ?>" name="thu_o" class="form-control" .>
                                                     </div>
                                                 </div>
                                                 <label for="example-search-input2" class="col-2">الخميس إلي :</label>
                                                 <div class="col-4">
-                                                    <input type="time" value="<?php echo $result[0]['thu_c'] ?>" name="thu_c" class="form-control" .>
+                                                    <input type="time" value="<?php echo $result[0]['thur-close'] ?>" name="thu_c" class="form-control" .>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="example-search-input2" class="col-2">الجمعة من :</label>
                                                 <div class="col-4">
                                                     <div class="col-10">
-                                                        <input type="time" value="<?php echo $result[0]['fri_o'] ?>" name="fri_o" class="form-control" .>
+                                                        <input type="time" value="<?php echo $result[0]['fri-open'] ?>" name="fri_o" class="form-control" .>
                                                     </div>
                                                 </div>
                                                 <label for="example-search-input2" class="col-2">الجمعة إلي :</label>
                                                 <div class="col-4">
-                                                    <input type="time" value="<?php echo $result[0]['fri_c'] ?>" name="fri_c" class="form-control" .>
+                                                    <input type="time" value="<?php echo $result[0]['fri-close'] ?>" name="fri_c" class="form-control" .>
                                                 </div>
                                             </div>
                                             <h4> من فضلك ادخل على هذا الموقع واكتب فى الخانات السفلية المطلوب ستجده فى
