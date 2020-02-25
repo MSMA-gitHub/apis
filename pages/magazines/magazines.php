@@ -1,6 +1,6 @@
 <?php
 require '../../api/db.php';
-$stmt = $conn->prepare("select magazine.id,title,end_date,count(photo)  from magazine inner join magazine_photo on magazine.id= magazine_photo.id  GROUP by magazine.id order by end_date desc
+$stmt = $conn->prepare("select magazine.id,title,end_date,count(magazine_photo.photo),photo  from magazine inner join magazine_photo on magazine.id= magazine_photo.id  GROUP by magazine.id order by end_date desc
 ;");
 $stmt->execute();
 $magazine = $stmt->fetchAll();

@@ -1,5 +1,8 @@
 <?php
 require '../../api/db.php';
+if (isset($_POST['id']))
+    $stmt = $conn->prepare("select id,name  from  store where id = " . $_POST['id'] . ";");
+else
 $stmt = $conn->prepare("select id,name  from  store ;");
 $stmt->execute();
 $stores = $stmt->fetchAll();
@@ -73,10 +76,14 @@ $stores_size = $stmt->rowcount();
                                                 <label for="example-search-input" class="col-2 col-form-label">المتجر</label>
                                                 <div class="col-10">
                                                     <select class="form-control" id="store" onchange="a()">
-                                                        <option value="">اختر</option>
                                                         <?php
-                                                        for ($i = 0; $i < $stores_size; $i++) {
-                                                            echo '<option value="' . $stores[$i][0] . '">' . $stores[$i][1] . '</option>';
+                                                        if (isset($_POST['id']))
+                                                            echo '<option selected value="' . $stores[0][0] . '">' . $stores[0][1] . '</option>';
+                                                        else {
+                                                            echo '<option value="">اختر</option>';
+                                                            for ($i = 0; $i < $stores_size; $i++) {
+                                                                echo '<option value="' . $stores[$i][0] . '">' . $stores[$i][1] . '</option>';
+                                                            }
                                                         }
                                                         ?>
                                                     </select>
@@ -186,7 +193,17 @@ $stores_size = $stmt->rowcount();
 </script>
 <script>
     function a() {
+        <?php
+        if (isset($_POST['id'])) {
+            echo 'var id=' . $_POST['id'] . ' ;';
+            echo " document.getElementById('store1').value =". $_POST['id'] . ' ;';
+        }
+        else {
+            echo "
         document.getElementById('store1').value = document.getElementById('store').value;
+     var id= document.getElementById('store').value;";
+        }
+        ?>
 
         $('#store').attr('disabled', true);
         const selectMembers = $("#selectBox");
@@ -195,7 +212,7 @@ $stores_size = $stmt->rowcount();
             url: "../../api/store/branch.php",
             method: "POST",
             data: {
-                id: document.getElementById('store').value
+                id: id
             },
             success: function (data) {
                 console.log(data);
@@ -213,6 +230,10 @@ $stores_size = $stmt->rowcount();
 
     }
 </script>
+<?php
+if (isset($_POST['id']))
+    echo '<script> a();</script>';
+?>
 <!-- End custom js for this page -->
 </body>
 

@@ -11,6 +11,12 @@ $sql = "insert into `magazine` (title,end_date,cover) values(?,?,?)";
 $stmt = $conn->prepare($sql);
 $stmt->execute(array($_POST['title'], $_POST['date'],$file));
 $id=$conn->lastInsertId();
+$type = $_POST['type'];
+for ($i = 0; $i < count($type); $i++) {
+    $sql = "insert into `magazine_type`  values(?,?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(array($id, $type[$i]));
+}
 for ($i = 0; $i < count($_FILES['images']['tmp_name']); $i++) {
     $file_get = $_FILES['images']['name'][$i];
     $temp = $_FILES['images']['tmp_name'][$i];
@@ -32,10 +38,10 @@ if (isset($s) && !empty($s)) {
     }
 }
 if ($stmt->rowCount() > 0)
-    echo '<script> window.location.href="../../pages/";</script>';
+    echo '<script> window.location.href="../../pages/magazines/magazines.php";</script>';
 else
     echo '<script> alert("no updated data");
-     window.location.href="../../pages/";
+     window.location.href="../../pages/magazines/magazines.php";
       </script>';
 
 ?>
