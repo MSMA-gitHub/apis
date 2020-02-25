@@ -1,4 +1,4 @@
-<?php
+=<?php
 require '../../api/db.php';
 $stmt = $conn->prepare("select code.id ,title,details,end_date,store_id  from code inner join store_code on code.id=store_code.code  where  type = 5  group  by code.id;");
 $stmt->execute();
