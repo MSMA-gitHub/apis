@@ -1,4 +1,5 @@
-<?php 
+<?php
+session_start();
 echo' <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 
 <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -7,11 +8,11 @@ echo' <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-
         <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" id="profileDropdown" href="../#" data-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-text">
-                    <p class="mb-1 text-black">Admin name</p>
+                    <p class="mb-1 text-black">'.$_SESSION["orodyadmin"].'</p>
                 </div>
             </a>
             <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="../../api/signout.php">
                     <i class="mdi mdi-logout mr-2 text-primary"></i> تسجيل خروج </a>
             </div>
         </li>
