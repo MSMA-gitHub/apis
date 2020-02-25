@@ -100,6 +100,17 @@ $stores_size = $stmt->rowcount();
                                                 </div>
                                             </div>
                                             <div class="form-group row">
+                                                <label for="example-search-input" class="col-2 col-form-label">نوع المتجر</label>
+                                                <div class="col-10">
+                                                    <select class="form-control" name="type0" id="cars" required>
+                                                        <option value="">اختر</option>
+                                                        <option value="3">حصري</option>
+                                                        <option value="2">أونلاين</option>
+                                                        <option value="4" >الأثنين</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
                                                 <label for="example-search-input" class="col-2 col-form-label">نوع العرض</label>
                                                 <div class="col-10">
                                                     <select class="form-control" name="type" id="cars" required>

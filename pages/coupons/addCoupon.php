@@ -92,7 +92,7 @@ $stores_size = $stmt->rowcount();
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="example-search-input" class="col-2 col-form-label">الفروع</label>
-                                                  <div class="col-10"><select onchange="getSelected()" name="branch[]"
+                                                  <div class="col-10"><select required onchange="getSelected()" name="branch[]"
                                                                                                      class="multi-select"
                                                                                                      multiple="multiple" id="selectBox"></select>
 
