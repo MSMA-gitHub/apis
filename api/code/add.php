@@ -10,9 +10,13 @@ else {
     $file = "assets/offers/" . $file_get;
     move_uploaded_file($temp, "../" . $file);
 }
-$sql = "insert into `code` (title,details,type,code,end_date,photo) values(?,?,?,?,?,?)";
+if(isset($_POST['type0']))
+    $u=$_POST['type0'];
+else
+    $u=1;
+$sql = "insert into `code` (title,details,type,code,end_date,photo,type2) values(?,?,?,?,?,?)";
 $stmt = $conn->prepare($sql);
-$stmt->execute(array($_POST['title'], $_POST['details'], $_POST['type'], $_POST['code'], $_POST['date'],$file));
+$stmt->execute(array($_POST['title'], $_POST['details'], $_POST['type'], $_POST['code'], $_POST['date'],$file,$u));
 $id=$conn->lastInsertId();
 $s = $_POST['store1'];
 if (isset($s) && !empty($s)) {

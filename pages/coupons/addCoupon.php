@@ -52,8 +52,7 @@ $stores_size = $stmt->rowcount();
                                                 <div onclick="pro1()" class="nav-profile-image">
                                                     <input style="display:none;" type="file" id="file" name="image"
                                                            onchange="display(this);">
-                                                    <img
-                                                         style="max-width:100%" id="img">
+                                                    <img src="../../api/assets/unloaded.png" style="max-width:100%" id="img" >
                                                     <h5>ارفع صورة</h5>
                                                 </div>
 

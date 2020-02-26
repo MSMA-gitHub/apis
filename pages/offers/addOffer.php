@@ -52,8 +52,7 @@ $stores_size = $stmt->rowcount();
                                             <div onclick="pro1()" class="nav-profile-image">
                                                 <input style="display:none;" type="file" id="file" name="image"
                                                        onchange="display(this);">
-                                                <img
-                                                    style="max-width:100%" id="img">
+                                                <img src="../../api/assets/unloaded.png" style="max-width:100%" id="img" >
                                                 <h5>ارفع صورة</h5>
                                             </div>
 
@@ -104,9 +103,9 @@ $stores_size = $stmt->rowcount();
                                                 <div class="col-10">
                                                     <select class="form-control" name="type0" id="cars" required>
                                                         <option value="">اختر</option>
-                                                        <option value="3">حصري</option>
-                                                        <option value="2">أونلاين</option>
-                                                        <option value="4" >الأثنين</option>
+                                                        <option value="0">حصري</option>
+                                                        <option value="1">أونلاين</option>
+                                                        <option value="2" >الأثنين</option>
                                                     </select>
                                                 </div>
                                             </div>

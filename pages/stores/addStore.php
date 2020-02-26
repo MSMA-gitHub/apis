@@ -42,7 +42,7 @@
                                             <div class="col-2">
                                             <div onclick="pro1()" class="nav-profile-image">
                                                     <input style="display:none;" type="file" id="file" name="image" required onchange="display(this);">
-                                                    <img style="max-width:100%" id="img" >
+                                                    <img src="../../api/assets/unloaded.png" style="max-width:100%" id="img" >
                                                     <h5>ارفع صورة</h5>
                                                 </div>
 
@@ -65,6 +65,7 @@
 
 
                                         </div>
+                                    
                                         <a> <button type="submit" style="float:left"  class="btn btn-outline-primary btn-round">اضافة</button></a> </form>
                                 </div>
                             </div>
